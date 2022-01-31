@@ -34,12 +34,21 @@ def build_desktop_scipper() -> None:
 	:return: None
 	"""
 
+	# Build premake.
 	if is_on_windows():
 		os.system("cd \"Desktop/Scipper/ThirdParty/premake-core-5.0.0\" && call Bootstrap.bat")
 	else:
 		os.system("cd \"Desktop/Scipper/ThirdParty/premake-core-5.0.0\" && call make")
 
+	# Build the screen capture lite library.
 	os.system("cd \"Desktop/Scipper/ThirdParty/screen_capture_lite\" && cmake CMakeLists.txt && cmake --build . --config Release")
+
+	# Generate the project files or makefiles depending on the platform.
+	if is_on_windows():
+		os.system("call \"Desktop/Scipper/ThirdParty/premake-core-5.0.0/bin/release/premake5\" vs2022")
+	else:
+		os.system("call \"Desktop/Scipper/ThirdParty/premake-core-5.0.0/bin/release/premake5\" gmake2")
+
 
 
 if __name__ == "__main__":
