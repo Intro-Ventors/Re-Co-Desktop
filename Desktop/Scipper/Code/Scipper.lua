@@ -8,7 +8,7 @@ project "Scipper"
 	flags { "MultiProcessorCompile" }
 
 	targetdir "%{wks.location}/Builds/%{cfg.longname}"
-	objdir "%{wks.location}/Builds/%{cfg.longname}"
+	objdir "%{wks.location}/Builds/Intermediate/%{cfg.longname}"
 
 	files {
 		"**.txt",
@@ -29,7 +29,7 @@ project "Scipper"
 	}
 	
 	links { 
-		"%{Binaries.screen_capture_lite}",
+		--"%{Binaries.screen_capture_lite}",
 	}
 
 	filter { "toolset:msc", "configurations:Debug" }

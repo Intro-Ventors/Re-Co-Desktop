@@ -8,7 +8,7 @@ project "Test"
 	flags { "MultiProcessorCompile" }
 
 	targetdir "%{wks.location}/Builds/%{cfg.longname}"
-	objdir "%{wks.location}/Builds/%{cfg.longname}"
+	objdir "%{wks.location}/Builds/Intermediate/%{cfg.longname}"
 
 	files {
 		"**.txt",
