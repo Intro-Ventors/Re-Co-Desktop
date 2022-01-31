@@ -33,5 +33,5 @@ workspace "Scipper"
 	Binaries = {}
 
 	-- Include the projects.
-	include "Core/Scipper.lua"
+	include "Code/Scipper.lua"
 	include "Test/Test.lua"

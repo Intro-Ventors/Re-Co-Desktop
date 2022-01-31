@@ -45,9 +45,9 @@ def build_desktop_scipper() -> None:
 
 	# Generate the project files or makefiles depending on the platform.
 	if is_on_windows():
-		os.system("call \"Desktop/Scipper/ThirdParty/premake-core-5.0.0/bin/release/premake5\" vs2022")
+		os.system("cd \"Desktop/Scipper\" && call \"ThirdParty/premake-core-5.0.0/bin/release/premake5\" vs2022")
 	else:
-		os.system("call \"Desktop/Scipper/ThirdParty/premake-core-5.0.0/bin/release/premake5\" gmake2")
+		os.system("cd \"Desktop/Scipper\" && call \"ThirdParty/premake-core-5.0.0/bin/release/premake5\" gmake2")
 
 
 

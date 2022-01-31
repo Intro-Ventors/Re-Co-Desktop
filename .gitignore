@@ -348,3 +348,19 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+
+# Dont include the screen capture lite build outputs.
+Desktop/Scipper/ThirdParty/screen_capture_lite/**/**.sln
+Desktop/Scipper/ThirdParty/screen_capture_lite/**/**.vcxproj
+Desktop/Scipper/ThirdParty/screen_capture_lite/**/**.vcxproj.filters
+Desktop/Scipper/ThirdParty/screen_capture_lite/**/**.json
+Desktop/Scipper/ThirdParty/screen_capture_lite/Example_OpenGL/glfw/src/glfw3Config.cmake
+Desktop/Scipper/ThirdParty/screen_capture_lite/Example_OpenGL/glfw/src/glfw3ConfigVersion.cmake
+Desktop/Scipper/ThirdParty/screen_capture_lite/Example_OpenGL/glfw/src/glfw3.pc
+Desktop/Scipper/ThirdParty/screen_capture_lite/Example_OpenGL/glfw/src/glfw_config.h
+Desktop/Scipper/ThirdParty/screen_capture_lite/screen_capture_lite_example_csharp.exe
+
+# Dont include the VS solution files.
+Desktop/Scipper/Code/Scipper.vcxproj
+Desktop/Scipper/Scipper.sln
+Desktop/Scipper/Test/Test.vcxproj
