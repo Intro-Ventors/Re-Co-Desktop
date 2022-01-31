@@ -8,7 +8,7 @@ import os
 import sys
 
 
-def is_on_windows() -> None:
+def is_on_windows() -> bool:
 	"""
 	Check if the current platform is windows.
 
