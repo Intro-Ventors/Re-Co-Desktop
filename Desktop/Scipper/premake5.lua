@@ -6,6 +6,17 @@ workspace "Scipper"
 		"Release"
 	}
 
+	-- Setup the dependencies.
+	IncludeDirectories = {}
+	IncludeDirectories["screen_capture_lite"] = "%{wks.location}/ThirdParty/screen_capture_lite/include"
+	IncludeDirectories["pybind11"] = "%{wks.location}/ThirdParty/pybind11/include"
+
+	LibraryDirectories = {}
+	LibraryDirectories["screen_capture_lite"] = "%{wks.location}/ThirdParty/screen_capture_lite/src_cpp/Release"
+
+	Binaries = {}
+	Binaries["screen_capture_lite"] = "screen_capture_lite_shared"
+
 	filter "configurations:Debug"
 		defines { "SCIPPER_DEBUG" }
 		symbols "On"
@@ -23,14 +34,6 @@ workspace "Scipper"
 		defines { "SCIPPER_PLATFORM_LINUX" }
 
 	filter ""
-
-	-- Setup the dependencies.
-	IncludeDirectories = {}
-	IncludeDirectories["screen_capture_lite"] = "ThirdParty/screen_capture_lite/include"
-	IncludeDirectories["pybind11"] = "ThirdParty/pybind11/include"
-
-	LibraryDirectories = {}
-	Binaries = {}
 
 	-- Include the projects.
 	include "Code/Scipper.lua"

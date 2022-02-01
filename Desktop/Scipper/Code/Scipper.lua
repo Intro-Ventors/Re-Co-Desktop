@@ -1,6 +1,6 @@
 project "Scipper"
 	language "C++"
-	kind "SharedLib"
+	kind "StaticLib"
 	systemversion "latest"
 	cppdialect "C++20"
 	staticruntime "on"
@@ -9,6 +9,8 @@ project "Scipper"
 
 	targetdir "%{wks.location}/Builds/%{cfg.longname}"
 	objdir "%{wks.location}/Builds/Intermediate/%{cfg.longname}"
+
+	defines { "SCIPPER_SHARED" }
 
 	files {
 		"**.txt",
@@ -29,13 +31,13 @@ project "Scipper"
 	}
 	
 	links { 
-		--"%{Binaries.screen_capture_lite}",
+		"%{Binaries.screen_capture_lite}",
 	}
 
 	filter { "toolset:msc", "configurations:Debug" }
-	    buildoptions "/MTd"
+		buildoptions "/MTd"
 
 	filter { "toolset:msc", "configurations:Release" }
-	    buildoptions "/MT"
+		buildoptions "/MT"
 
 	filter ""

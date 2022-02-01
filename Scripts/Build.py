@@ -41,7 +41,7 @@ def build_desktop_scipper() -> None:
 		os.system("cd \"Desktop/Scipper/ThirdParty/premake-core-5.0.0\" && call make")
 
 	# Build the screen capture lite library.
-	os.system("cd \"Desktop/Scipper/ThirdParty/screen_capture_lite\" && cmake CMakeLists.txt && cmake --build . --config Release")
+	os.system("cd \"Desktop/Scipper/ThirdParty/screen_capture_lite\" && cmake CMakeLists.txt && cmake --build . --config Release --clean-first")
 
 	# Generate the project files or makefiles depending on the platform.
 	if is_on_windows():

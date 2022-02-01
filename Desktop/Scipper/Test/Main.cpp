@@ -1,7 +1,8 @@
 #include <iostream>
+#include "Instance.hpp"
 
 int main()
 {
-	std::cout << "Hello from Scipper!\n";
+	Scipper::Instance mInstance;
 	return 0;
 }
