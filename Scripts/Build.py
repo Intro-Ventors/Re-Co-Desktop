@@ -6,6 +6,7 @@ Once the Bootstrap.bat file is run, it will run this file using the python inter
 
 import os
 import sys
+import shutil
 
 
 def is_on_windows() -> bool:
@@ -34,21 +35,38 @@ def build_desktop_scipper() -> None:
 	:return: None
 	"""
 
-	# Build premake.
-	if is_on_windows():
-		os.system("cd \"Desktop/Scipper/ThirdParty/premake-core-5.0.0\" && call Bootstrap.bat")
-	else:
-		os.system("cd \"Desktop/Scipper/ThirdParty/premake-core-5.0.0\" && call make")
-
 	# Build the screen capture lite library.
 	os.system("cd \"Desktop/Scipper/ThirdParty/screen_capture_lite\" && cmake CMakeLists.txt && cmake --build . --config Release --clean-first")
+	os.system("cd \"Desktop/Scipper/ThirdParty/screen_capture_lite\" && cmake CMakeLists.txt && cmake --build . --config Debug --clean-first")
 
-	# Generate the project files or makefiles depending on the platform.
+	# Make the required build directories (they're made automatically by the compiler but we need it explicitly here because we need to copy paste the 
+	# third party binaries there beforehand).
+	try:
+		os.makedirs("Desktop/Scipper/Builds/Debug")
+	except FileExistsError:
+		pass
+
+	try:
+		os.makedirs("Desktop/Scipper/Builds/Release")
+	except FileExistsError:
+		pass
+
+	# Build premake and the project files.
 	if is_on_windows():
-		os.system("cd \"Desktop/Scipper\" && call \"ThirdParty/premake-core-5.0.0/bin/release/premake5\" vs2022")
-	else:
-		os.system("cd \"Desktop/Scipper\" && call \"ThirdParty/premake-core-5.0.0/bin/release/premake5\" gmake2")
+		# Copy the screen capture lite dlls to the correct folders.
+		shutil.copy("Desktop/Scipper/ThirdParty/screen_capture_lite/Debug/screen_capture_lite_shared.dll", "Desktop/Scipper/Builds/Debug")
+		shutil.copy("Desktop/Scipper/ThirdParty/screen_capture_lite/Release/screen_capture_lite_shared.dll", "Desktop/Scipper/Builds/Release")
 
+		os.system("cd \"Desktop/Scipper/ThirdParty/premake-core-5.0.0\" && call Bootstrap.bat")
+		os.system("cd \"Desktop/Scipper\" && call \"ThirdParty/premake-core-5.0.0/bin/release/premake5\" vs2022")
+
+	else:
+		# Copy the screen capture lite dlls to the correct folders.
+		shutil.copy("\"Desktop/Scipper/ThirdParty/screen_capture_lite/Debug/screen_capture_lite_shared.so\"", "\"Desktop/Scipper/Builds/Debug\"")
+		shutil.copy("\"Desktop/Scipper/ThirdParty/screen_capture_lite/Release/screen_capture_lite_shared.so\"", "\"Desktop/Scipper/Builds/Release\"")
+
+		os.system("cd \"Desktop/Scipper/ThirdParty/premake-core-5.0.0\" && call make")
+		os.system("cd \"Desktop/Scipper\" && call \"ThirdParty/premake-core-5.0.0/bin/release/premake5\" gmake2")
 
 
 if __name__ == "__main__":

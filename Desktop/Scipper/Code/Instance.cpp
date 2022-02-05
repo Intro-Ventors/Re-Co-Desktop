@@ -8,6 +8,9 @@ namespace Scipper
 	{
 		const auto monitors = SL::Screen_Capture::GetMonitors();
 		const auto windows = SL::Screen_Capture::GetWindows();
+
+		for (auto const& window : windows)
+			m_Screens.emplace_back(std::string_view(window.Name));
 	}
 
 	std::vector<Screen> Instance::getScreens() const

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "RScreenCapture.hpp"
+#include <string>
 
 namespace Scipper
 {
@@ -12,8 +13,13 @@ namespace Scipper
 	{
 	public:
 		/**
-		 * Default constructor.
+		 * Constructor.
+		 * 
+		 * @param name The name of the screen.
 		 */
-		Screen() = default;
+		Screen(std::string_view name);
+
+	private:
+		std::string_view m_Name;
 	};
 }

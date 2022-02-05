@@ -30,16 +30,6 @@ project "Test"
 		"Scipper",
 	}
 
-	filter "toolset:msc"
-		postbuildcommands {
-			"{Copy} \"%{wks.location}/ThirdParty/screen_capture_lite/Release/screen_capture_lite_shared.dll\" \"%{cfg.targetdir}\""
-		}
-
-	filter "toolset:clang or gcc"
-		postbuildcommands {
-			"{Copy} \"%{wks.location}/ThirdParty/screen_capture_lite/Release/screen_capture_lite_shared.so\" \"%{cfg.targetdir}\""
-		}
-
 	filter { "toolset:msc", "configurations:Debug" }
 	    buildoptions "/MTd"
 

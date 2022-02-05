@@ -7,10 +7,10 @@ Reality Core (Re-Co) for short is a virtual desktop solution which enables users
 | Name                        | Student ID | UoW ID    | IIT Email                   |
 | --------------------------- | ---------- | --------- | --------------------------- |
 | R. W. D. Samaranayake       | 20200903   | w1838836  | wishal.20200903@iit.ac.lk   |
-| R.R. Ganesh                 | 2019218    | w1809915  | raahul.2019218@iit.ac.lk    |
-| K.G. Ratnajothy             | 20200214   | w18099586 | kanishka.20200214@iit.ac.lk |
-| M.S.J Weerakkody            | 2019573    | w18099225 | sharven.2019573@iit.ac.lk   |
-| R.A.J.A. Ranasinghe         | 20200817   | w18379400 | jayali.20200817@iit.ac.lk   |
+| R. R. Ganesh                | 2019218    | w1809915  | raahul.2019218@iit.ac.lk    |
+| K. G. Ratnajothy            | 20200214   | w18099586 | kanishka.20200214@iit.ac.lk |
+| M. S. J Weerakkody          | 2019573    | w18099225 | sharven.2019573@iit.ac.lk   |
+| R. A. J. A. Ranasinghe      | 20200817   | w18379400 | jayali.20200817@iit.ac.lk   |
 
 ## How to build
 
