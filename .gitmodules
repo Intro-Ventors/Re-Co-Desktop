@@ -4,3 +4,6 @@
 [submodule "Desktop/Scipper/ThirdParty/pybind11"]
 	path = Desktop/Scipper/ThirdParty/pybind11
 	url = https://github.com/Intro-Ventors/pybind11
+[submodule "Mobile/Graphics/ThirdParty/dart-gl"]
+	path = Mobile/Graphics/ThirdParty/dart-gl
+	url = https://github.com/google/dart-gl
