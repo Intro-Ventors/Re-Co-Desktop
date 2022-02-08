@@ -28,6 +28,9 @@ After the above dependencies are configured, clone this repository to a local di
 
 ```bash
 git clone https://github.com/DhirajWishal/Re-Co {SOURCE}
+cd {SOURCE}
+git submodule init
+git submodule update
 ```
 
 *Here `{SOURCE}` stands for the location where the repository is cloned to.*
