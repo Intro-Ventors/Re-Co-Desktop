@@ -6,7 +6,6 @@ namespace Scipper
 {
 	Instance::Instance()
 	{
-		const auto monitors = SL::Screen_Capture::GetMonitors();
 		const auto windows = SL::Screen_Capture::GetWindows();
 
 		for (auto const& window : windows)
