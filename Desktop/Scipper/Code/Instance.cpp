@@ -37,6 +37,7 @@ namespace Scipper
 
 	Instance::Instance()
 	{
+		// Refresh the titles to get the current titles.
 		refreshTitles();
 	}
 
@@ -66,8 +67,8 @@ namespace Scipper
 				for (auto const& window : windows)
 					m_ScreenTitles.emplace_back(window.Name);
 
+				// Notify the parent thread to continue executing.
 				bState = true;
-
 				lock.unlock();
 				condition.notify_one();
 
@@ -88,25 +89,5 @@ namespace Scipper
 			auto lock = std::unique_lock(resourceMutex);
 			condition.wait(lock, [&bState] { return bState; });
 		}
-	}
-
-	std::vector<Screen> Instance::getScreens() const
-	{
-		return m_Screens;
-	}
-
-	std::vector<Screen>& Instance::getScreens()
-	{
-		return m_Screens;
-	}
-
-	std::vector<std::string> Instance::getScreenTitles() const
-	{
-		return m_ScreenTitles;
-	}
-
-	std::vector<std::string>& Instance::getScreenTitles()
-	{
-		return m_ScreenTitles;
 	}
 }
