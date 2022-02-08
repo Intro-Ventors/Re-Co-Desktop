@@ -28,6 +28,19 @@ def print_statement(message: str) -> None:
 	print("=========================", message, "=========================")
 
 
+def create_directory(path: str) -> None:
+	"""
+	Create a directory if possible.
+
+	:param path: The path to create.
+	:return: None.
+	"""
+	try:
+		os.makedirs(path)
+	except FileExistsError:
+		pass
+
+
 def build_desktop_scipper() -> None:
 	"""
 	Build the decktop scipper (screen capturing API) library.
@@ -35,21 +48,15 @@ def build_desktop_scipper() -> None:
 	:return: None
 	"""
 
+
 	# Build the screen capture lite library.
 	os.system("cd \"Desktop/Scipper/ThirdParty/screen_capture_lite\" && cmake CMakeLists.txt && cmake --build . --config Release --clean-first")
 	os.system("cd \"Desktop/Scipper/ThirdParty/screen_capture_lite\" && cmake CMakeLists.txt && cmake --build . --config Debug --clean-first")
 
 	# Make the required build directories (they're made automatically by the compiler but we need it explicitly here because we need to copy paste the 
 	# third party binaries there beforehand).
-	try:
-		os.makedirs("Desktop/Scipper/Builds/Debug")
-	except FileExistsError:
-		pass
-
-	try:
-		os.makedirs("Desktop/Scipper/Builds/Release")
-	except FileExistsError:
-		pass
+	create_directory("Desktop/Scipper/Builds/Debug")
+	create_directory("Desktop/Scipper/Builds/Release")
 
 	# Build premake and the project files.
 	if is_on_windows():

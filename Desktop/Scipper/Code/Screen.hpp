@@ -17,9 +17,9 @@ namespace Scipper
 		 * 
 		 * @param name The name of the screen.
 		 */
-		Screen(std::string_view name);
+		Screen(std::string name);
 
 	private:
-		std::string_view m_Name;
+		std::string m_Name;
 	};
 }

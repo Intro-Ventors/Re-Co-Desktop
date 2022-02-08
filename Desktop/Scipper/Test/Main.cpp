@@ -4,6 +4,6 @@
 int main()
 {
 	Scipper::Instance mInstance;
-	auto const& screens = mInstance.getScreens();
+	auto const& screens = mInstance.getScreenTitles();
 	return 0;
 }

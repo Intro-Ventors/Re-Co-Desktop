@@ -12,7 +12,7 @@ workspace "Scipper"
 	IncludeDirectories["pybind11"] = "%{wks.location}/ThirdParty/pybind11/include"
 
 	LibraryDirectories = {}
-	LibraryDirectories["screen_capture_lite"] = "%{wks.location}/ThirdParty/screen_capture_lite/src_cpp/Release"
+	LibraryDirectories["screen_capture_lite"] = "%{wks.location}/ThirdParty/screen_capture_lite/src_cpp/%{cfg.name}"
 
 	Binaries = {}
 	Binaries["screen_capture_lite"] = "screen_capture_lite_shared"

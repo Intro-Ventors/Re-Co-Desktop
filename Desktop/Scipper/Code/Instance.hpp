@@ -18,6 +18,11 @@ namespace Scipper
 		Instance();
 
 		/**
+		 * Refresh the screen titles.
+		 */
+		void refreshTitles();
+
+		/**
 		 * Get the screens from the instance.
 		 * 
 		 * @return The screens vector.
@@ -31,7 +36,22 @@ namespace Scipper
 		 */
 		std::vector<Screen>& getScreens();
 
+		/**
+		 * Get all the screen titles.
+		 * 
+		 * @return The title list.
+		 */
+		std::vector<std::string> getScreenTitles() const;
+
+		/**
+		 * Get all the screen titles.
+		 *
+		 * @return The title list.
+		 */
+		std::vector<std::string>& getScreenTitles();
+
 	private:
 		std::vector<Screen> m_Screens;
+		std::vector<std::string> m_ScreenTitles;
 	};
 }

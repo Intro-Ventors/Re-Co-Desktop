@@ -35,9 +35,7 @@ project "Scipper"
 	}
 
 	filter { "toolset:msc", "configurations:Debug" }
-		buildoptions "/MTd"
+	    buildoptions "/MDd"
 
 	filter { "toolset:msc", "configurations:Release" }
-		buildoptions "/MT"
-
-	filter ""
+	    buildoptions "/MD"
