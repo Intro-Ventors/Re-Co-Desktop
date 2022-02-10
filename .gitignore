@@ -354,27 +354,14 @@ Desktop/**/**.sln
 Desktop/**/**.vcxproj
 Desktop/**/**.vcxproj.filters
 
-# Dont include the screen capture lite build outputs.
-Desktop/Scipper/ThirdParty/screen_capture_lite/**/**.json
-Desktop/Scipper/ThirdParty/screen_capture_lite/Example_OpenGL/glfw/src/glfw3Config.cmake
-Desktop/Scipper/ThirdParty/screen_capture_lite/Example_OpenGL/glfw/src/glfw3ConfigVersion.cmake
-Desktop/Scipper/ThirdParty/screen_capture_lite/Example_OpenGL/glfw/src/glfw3.pc
-Desktop/Scipper/ThirdParty/screen_capture_lite/Example_OpenGL/glfw/src/glfw_config.h
-Desktop/Scipper/ThirdParty/screen_capture_lite/screen_capture_lite_example_csharp.exe
-
-# Dont include the VS solution files.
-Desktop/Scipper/Code/Scipper.vcxproj
-Desktop/Scipper/Scipper.sln
-Desktop/Scipper/Test/Test.vcxproj
-
 # Dont include the Qt build and solution files.
-Desktop/Server/build-*
-Desktop/Server/RealityCore/ui_**.h
-Desktop/Server/RealityCore/**.stash
+Desktop/build-*
+Desktop/RealityCore/ui_**.h
+Desktop/RealityCore/**.stash
 
-Desktop/Server/RealityCore/ThirdParty/screen_capture_lite/**/**.json
-Desktop/Server/RealityCore/ThirdParty/screen_capture_lite/Example_OpenGL/glfw/src/glfw3Config.cmake
-Desktop/Server/RealityCore/ThirdParty/screen_capture_lite/Example_OpenGL/glfw/src/glfw3ConfigVersion.cmake
-Desktop/Server/RealityCore/ThirdParty/screen_capture_lite/Example_OpenGL/glfw/src/glfw3.pc
-Desktop/Server/RealityCore/ThirdParty/screen_capture_lite/Example_OpenGL/glfw/src/glfw_config.h
-Desktop/Server/RealityCore/ThirdParty/screen_capture_lite/screen_capture_lite_example_csharp.exe
+Desktop/RealityCore/ThirdParty/screen_capture_lite/**/**.json
+Desktop/RealityCore/ThirdParty/screen_capture_lite/Example_OpenGL/glfw/src/glfw3Config.cmake
+Desktop/RealityCore/ThirdParty/screen_capture_lite/Example_OpenGL/glfw/src/glfw3ConfigVersion.cmake
+Desktop/RealityCore/ThirdParty/screen_capture_lite/Example_OpenGL/glfw/src/glfw3.pc
+Desktop/RealityCore/ThirdParty/screen_capture_lite/Example_OpenGL/glfw/src/glfw_config.h
+Desktop/RealityCore/ThirdParty/screen_capture_lite/screen_capture_lite_example_csharp.exe
