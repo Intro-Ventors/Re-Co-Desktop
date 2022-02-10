@@ -6,27 +6,30 @@ QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
 
-/**
- * Main window class.
- * This class contains the main window of the entire desktop application.
- */
-class MainWindow : public QMainWindow
+namespace GUI
 {
-	Q_OBJECT
-
-public:
 	/**
-	 * Constructor.
-	 *
-	 * @param parent The parent object. Default is nullptr.
+	 * Main window class.
+	 * This class contains the main window of the entire desktop application.
 	 */
-	MainWindow(QWidget* parent = nullptr);
+	class MainWindow : public QMainWindow
+	{
+		Q_OBJECT
 
-	/**
-	 * Default destructor.
-	 */
-	~MainWindow();
+	public:
+		/**
+		 * Constructor.
+		 *
+		 * @param parent The parent object. Default is nullptr.
+		 */
+		MainWindow(QWidget* parent = nullptr);
 
-private:
-	Ui::MainWindow* p_MainWindow = nullptr;
-};
+		/**
+		 * Default destructor.
+		 */
+		~MainWindow();
+
+	private:
+		Ui::MainWindow* p_MainWindow = nullptr;
+	};
+}

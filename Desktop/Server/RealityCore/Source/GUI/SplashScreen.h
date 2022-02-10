@@ -3,33 +3,36 @@
 #include <QSplashScreen>
 #include <QMovie>
 
-/**
- * Splash screen object.
- * Splash screens are the windows that are shown to the user when the application is initializing itself.
- */
-class SplashScreen : public QSplashScreen
+namespace GUI
 {
-	Q_OBJECT
-
-public:
 	/**
-	 * Default constructor.
+	 * Splash screen object.
+	 * Splash screens are the windows that are shown to the user when the application is initializing itself.
 	 */
-	SplashScreen();
+	class SplashScreen : public QSplashScreen
+	{
+		Q_OBJECT
 
-	/**
-	 * Finish the movie.
-	 */
-	void finishMovie();
+	public:
+		/**
+		 * Default constructor.
+		 */
+		SplashScreen();
 
-private slots:
-	/**
-	 * Function to handle the frame change signal.
-	 *
-	 * @param frameNumber The frame number in the movie.
-	 */
-	void onFrameChange(int frameNumber);
+		/**
+		 * Finish the movie.
+		 */
+		void finishMovie();
 
-private:
-	QMovie m_Movie = QMovie(":/Assets/SplashScreen.gif");
-};
+	private slots:
+		/**
+		 * Function to handle the frame change signal.
+		 *
+		 * @param frameNumber The frame number in the movie.
+		 */
+		void onFrameChange(int frameNumber);
+
+	private:
+		QMovie m_Movie = QMovie(":/Assets/SplashScreen.gif");
+	};
+}

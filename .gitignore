@@ -371,3 +371,10 @@ Desktop/Scipper/Test/Test.vcxproj
 Desktop/Server/build-*
 Desktop/Server/RealityCore/ui_**.h
 Desktop/Server/RealityCore/**.stash
+
+Desktop/Server/RealityCore/ThirdParty/screen_capture_lite/**/**.json
+Desktop/Server/RealityCore/ThirdParty/screen_capture_lite/Example_OpenGL/glfw/src/glfw3Config.cmake
+Desktop/Server/RealityCore/ThirdParty/screen_capture_lite/Example_OpenGL/glfw/src/glfw3ConfigVersion.cmake
+Desktop/Server/RealityCore/ThirdParty/screen_capture_lite/Example_OpenGL/glfw/src/glfw3.pc
+Desktop/Server/RealityCore/ThirdParty/screen_capture_lite/Example_OpenGL/glfw/src/glfw_config.h
+Desktop/Server/RealityCore/ThirdParty/screen_capture_lite/screen_capture_lite_example_csharp.exe

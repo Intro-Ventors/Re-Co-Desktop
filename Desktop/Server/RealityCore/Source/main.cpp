@@ -10,11 +10,11 @@ int main(int argc, char* argv[])
 	QApplication application(argc, argv);
 
 	// Create the splash screen object while we initialize the other components.
-	SplashScreen splashScreen = {};
+	GUI::SplashScreen splashScreen = {};
 	splashScreen.show();
 
 	// Create the window instance.
-	MainWindow window = {};
+	GUI::MainWindow window = {};
 
 	// Wait till the window initializes.
 	QTimer::singleShot(5000, [&window, &splashScreen]
