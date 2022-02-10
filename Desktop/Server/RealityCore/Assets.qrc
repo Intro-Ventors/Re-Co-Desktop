@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Assets/TemporaryLoadingScreen.gif</file>
+        <file>Assets/SplashScreen.gif</file>
+    </qresource>
+</RCC>

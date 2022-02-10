@@ -42,7 +42,7 @@ Once cloned, change directory to the `{SOURCE}` directory and run the `Bootstrap
 #### Configuring Qt
 
 It is recommended to install the latest version of Qt. After the installation, make sure to configure the Qt Visual Studio Tools with the proper version. Then you can open the qmake file present within 
-`{SOURCE}`/Desktop/Server/GUI` using the Qt VS Tools extension. Thereon, you can easily build the project and run using Visual Studio.
+`{SOURCE}/Desktop/Server/RealityCore` using the Qt VS Tools extension. Thereon, you can easily build the project and run using Visual Studio.
 
 ## License
 
