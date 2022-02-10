@@ -349,10 +349,12 @@ MigrationBackup/
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
 
+# Make sure not to include the VS builds.
+Desktop/**/**.sln
+Desktop/**/**.vcxproj
+Desktop/**/**.vcxproj.filters
+
 # Dont include the screen capture lite build outputs.
-Desktop/Scipper/ThirdParty/screen_capture_lite/**/**.sln
-Desktop/Scipper/ThirdParty/screen_capture_lite/**/**.vcxproj
-Desktop/Scipper/ThirdParty/screen_capture_lite/**/**.vcxproj.filters
 Desktop/Scipper/ThirdParty/screen_capture_lite/**/**.json
 Desktop/Scipper/ThirdParty/screen_capture_lite/Example_OpenGL/glfw/src/glfw3Config.cmake
 Desktop/Scipper/ThirdParty/screen_capture_lite/Example_OpenGL/glfw/src/glfw3ConfigVersion.cmake
@@ -364,3 +366,8 @@ Desktop/Scipper/ThirdParty/screen_capture_lite/screen_capture_lite_example_cshar
 Desktop/Scipper/Code/Scipper.vcxproj
 Desktop/Scipper/Scipper.sln
 Desktop/Scipper/Test/Test.vcxproj
+
+# Dont include the Qt build and solution files.
+Desktop/Server/build-*
+Desktop/Server/RealityCore/ui_**.h
+Desktop/Server/RealityCore/**.stash

@@ -4,8 +4,13 @@
 
 int main(int argc, char *argv[])
 {
+    // Setup the application.
     QApplication a(argc, argv);
-    MainWindow w;
-    w.show();
+
+    /// Create the window instance.
+    MainWindow window;
+    window.show();
+
+    // Execute the application.
     return a.exec();
 }

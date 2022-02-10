@@ -1,15 +1,17 @@
 #include "MainWindow.h"
-#include "ui_MainWindow.h"
+#include "../../ui_MainWindow.h"
 
-MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
+MainWindow::MainWindow(QWidget* parent)
+	: QMainWindow(parent)
+	, p_MainWindow(new Ui::MainWindow)
 {
-    ui->setupUi(this);
+	// Setup the UI.
+	p_MainWindow->setupUi(this);
 }
 
 MainWindow::~MainWindow()
 {
-    delete ui;
+	// Deleted the allocated window.
+	delete p_MainWindow;
 }
 
