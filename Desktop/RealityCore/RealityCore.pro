@@ -1,4 +1,6 @@
-QT       += core gui
+QT +=                                           \
+    core                                        \
+    gui                                         \
 
 greaterThan(QT_MAJOR_VERSION, 5): QT += widgets
 
@@ -12,6 +14,8 @@ SOURCES +=                                      \
     Source/Main.cpp                             \
     Source/GUI/MainWindow.cpp                   \
     Source/GUI/SplashScreen.cpp                 \
+    Source/GUI/About.cpp                        \
+    Source/GUI/Login.cpp                        \
                                                 \
     Source/Scipper/Instance.cpp                 \
     Source/Scipper/RScreenCapture.cpp           \
@@ -20,13 +24,17 @@ SOURCES +=                                      \
 HEADERS +=                                      \
     Source/GUI/MainWindow.h                     \
     Source/GUI/SplashScreen.h                   \
+    Source/GUI/About.h                          \
+    Source/GUI/Login.h                          \
                                                 \
     Source/Scipper/Instance.hpp                 \
     Source/Scipper/RScreenCapture.hpp           \
     Source/Scipper/Screen.hpp                   \
 
 FORMS +=                                        \
-    Source/GUI/Forms/MainWindow.ui
+    Source/GUI/Forms/MainWindow.ui              \
+    Source/GUI/Forms/About.ui                   \
+    Source/GUI/Forms/Login.ui
 
 RESOURCES +=                                    \
     Assets.qrc

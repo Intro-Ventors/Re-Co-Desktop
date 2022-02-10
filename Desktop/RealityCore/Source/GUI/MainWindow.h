@@ -20,9 +20,9 @@ namespace GUI
 		/**
 		 * Constructor.
 		 *
-		 * @param parent The parent object. Default is nullptr.
+		 * @param pParent The parent object. Default is nullptr.
 		 */
-		MainWindow(QWidget* parent = nullptr);
+		MainWindow(QWidget* pParent = nullptr);
 
 		/**
 		 * Default destructor.
