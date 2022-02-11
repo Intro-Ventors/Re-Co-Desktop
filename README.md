@@ -1,6 +1,7 @@
 # Re-Co
 
-Reality Core (Re-Co) for short is a virtual desktop solution which enables users to use mobile phones to interact with the desktop computer rather than investing on expensive dedicated VR gear.
+Reality Core (Re-Co) for short is a virtual desktop solution which enables users to use mobile phones to interact with the desktop computer rather than investing on expensive dedicated VR gear. 
+This repository contains the desktop application's codebase.
 
 ## Team members
 
@@ -22,9 +23,8 @@ When building for Windows, make sure that you have the following dependencies.
 2. [CMake](https://cmake.org/).
 3. [Python](https://www.python.org/downloads/).
 4. [PyCharm IDE](https://www.jetbrains.com/pycharm/).
-5. [Android Studio](https://developer.android.com/studio).
-6. [Qt Framework](https://www.qt.io/).
-7. [Qt Visual Studio Tools](https://doc.qt.io/qtvstools/index.html).
+5. [Qt Framework](https://www.qt.io/).
+6. [Qt Visual Studio Tools](https://doc.qt.io/qtvstools/index.html).
 
 After the above dependencies are configured, clone this repository to a local directory.
 
@@ -37,11 +37,12 @@ git submodule update
 
 *Here `{SOURCE}` stands for the location where the repository is cloned to.*
 
-Once cloned, change directory to the `{SOURCE}` directory and run the `Bootstrap.bat` file and it will generate the required build tools and will generate the required binaries to run the application.
+Once cloned, change directory to the `{SOURCE}` directory and run the `Bootstrap.bat` file and it will generate the required build tools and will generate the required binaries to run the application. Once this is done, you can proceed to open the
+`RealityCore.pro` file in either the QtCreator application or by using the Qt VS Tools extension.
 
 #### Configuring Qt
 
-It is recommended to install the latest version of Qt. After the installation, make sure to configure the Qt Visual Studio Tools with the proper version. Then you can open the qmake file present within 
+It is recommended to install the latest version of Qt. After the installation, make sure to configure the Qt Visual Studio Tools with the proper version. Then you can open the qmake file present within
 `{SOURCE}/Desktop/Server/RealityCore` using the Qt VS Tools extension. Thereon, you can easily build the project and run using Visual Studio.
 
 ## License

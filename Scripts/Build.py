@@ -6,7 +6,6 @@ Once the Bootstrap.bat file is run, it will run this file using the python inter
 
 import os
 import sys
-import shutil
 
 
 def is_on_windows() -> bool:
@@ -49,8 +48,8 @@ def build_desktop() -> None:
 	"""
 
 	# Build the screen capture lite library.
-	os.system("cd \"Desktop/RealityCore/ThirdParty/screen_capture_lite\" && cmake CMakeLists.txt && cmake --build . --config Release --clean-first")
-	os.system("cd \"Desktop/RealityCore/ThirdParty/screen_capture_lite\" && cmake CMakeLists.txt && cmake --build . --config Debug --clean-first")
+	os.system("cd \"RealityCore/ThirdParty/screen_capture_lite\" && cmake CMakeLists.txt && cmake --build . --config Release --clean-first")
+	os.system("cd \"RealityCore/ThirdParty/screen_capture_lite\" && cmake CMakeLists.txt && cmake --build . --config Debug --clean-first")
 
 
 if __name__ == "__main__":
