@@ -1,4 +1,4 @@
-# Re-Co
+# Re-Co Desktop
 
 Reality Core (Re-Co) for short is a virtual desktop solution which enables users to use mobile phones to interact with the desktop computer rather than investing on expensive dedicated VR gear. 
 This repository contains the desktop application's codebase.
@@ -38,7 +38,7 @@ git submodule update
 *Here `{SOURCE}` stands for the location where the repository is cloned to.*
 
 Once cloned, change directory to the `{SOURCE}` directory and run the `Bootstrap.bat` file and it will generate the required build tools and will generate the required binaries to run the application. Once this is done, you can proceed to open the
-`RealityCore.pro` file in either the QtCreator application or by using the Qt VS Tools extension.
+`RealityCore/RealityCore.pro` file in either the QtCreator application or by using the Qt VS Tools extension.
 
 #### Configuring Qt
 
