@@ -1,5 +1,5 @@
 """
-Main build script for Re-Co.
+Main build script for Re-Co-Desktop.
 
 Once the Bootstrap.bat file is run, it will run this file using the python interpreter. 
 """
