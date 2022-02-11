@@ -1,3 +1,6 @@
 [submodule "RealityCore/ThirdParty/screen_capture_lite"]
 	path = RealityCore/ThirdParty/screen_capture_lite
 	url = https://github.com/Intro-Ventors/screen_capture_lite
+[submodule "RealityCore/Assets"]
+	path = RealityCore/Assets
+	url = https://github.com/Intro-Ventors/Assets
