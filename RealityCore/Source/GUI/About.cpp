@@ -15,5 +15,8 @@ namespace GUI
 	{
 		// Delete the allocated pointer.
 		delete p_About;
+
+		// Yeah this is not the best thing to do but you can do this because there is no other way.
+		delete this;
 	}
 }

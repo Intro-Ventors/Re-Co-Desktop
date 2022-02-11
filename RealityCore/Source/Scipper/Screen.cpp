@@ -2,7 +2,7 @@
 
 namespace Scipper
 {
-	Screen::Screen(std::string name) : m_Name(std::move(name))
+	Screen::Screen(QString name) : m_Name(std::move(name))
 	{
 	}
 }

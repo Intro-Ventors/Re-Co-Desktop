@@ -1,7 +1,7 @@
 #include "MainWindow.h"
 #include "../../ui_MainWindow.h"
 
-#include "Login.h"
+#include "About.h"
 
 namespace GUI
 {
@@ -12,15 +12,17 @@ namespace GUI
 		// Setup the UI.
 		p_MainWindow->setupUi(this);
 
+		// Create the help menu and add them to the menu.
 		QMenu* pMenu = new QMenu("Help", p_MainWindow->menubar);
+		p_MainWindow->menubar->addMenu(pMenu);
+
+		// Add the about action.
 		pMenu->addAction("About", [this]
 			{
-				p_MainWindow->gridLayout->addWidget(new Login(this));
+				// Create the about window and show it to the user.
+				auto pAbout = new About();
+				pAbout->show();
 			});
-
-		auto pLogin = new Login();
-		pLogin->show();
-		p_MainWindow->menubar->addMenu(pMenu);
 	}
 
 	MainWindow::~MainWindow()

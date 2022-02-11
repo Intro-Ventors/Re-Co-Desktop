@@ -1,7 +1,7 @@
 #pragma once
 
 #include "RScreenCapture.hpp"
-#include <string>
+#include <QString>
 
 namespace Scipper
 {
@@ -17,9 +17,9 @@ namespace Scipper
 		 * 
 		 * @param name The name of the screen.
 		 */
-		Screen(std::string name);
+		Screen(QString name);
 
 	private:
-		std::string m_Name;
+		QString m_Name;
 	};
 }

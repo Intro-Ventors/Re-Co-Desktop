@@ -14,9 +14,7 @@
    <string>Reality Core</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">#centralwidget {
-		background-image: url(:/Assets/SplashScreen.gif);
-}</string>
+   <string notr="true"/>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
