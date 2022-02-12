@@ -26,11 +26,19 @@ namespace GUI
 
 		// Set the window icon.
 		setWindowIcon(QIcon(":Assets/2D/Re-Co Logo.ico"));
+
+		// Setup the screens.
+		setupScreens();
 	}
 
 	MainWindow::~MainWindow()
 	{
 		// Deleted the allocated window.
 		delete p_MainWindow;
+	}
+	
+	void MainWindow::setupScreens()
+	{
+		auto& screens = m_Instance.refreshScreens();
 	}
 }

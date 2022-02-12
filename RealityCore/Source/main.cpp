@@ -14,10 +14,10 @@ int main(int argc, char* argv[])
 	GUI::MainWindow window = {};
 
 	// Create the login dialog.
-	GUI::Login login = {};
+	auto pLogin = new GUI::Login();
 
 	// Connect the finished signal to our slot.
-	QObject::connect(&login, &QDialog::finished, [&window, &login](int result)
+	QObject::connect(pLogin, &QDialog::finished, [&window, pLogin](int result)
 		{
 			// Accepted means that the user has pressed sign in.
 			if (result == QDialog::Accepted)
@@ -27,10 +27,11 @@ int main(int argc, char* argv[])
 			}
 
 			// Else we can just skip and close the application.
+			delete pLogin;
 		});
 
 	// Show the login dialog.
-	login.show();
+	pLogin->show();
 
 	// Execute the application.
 	return application.exec();

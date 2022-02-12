@@ -15,12 +15,20 @@ namespace Scipper
 		/**
 		 * Default constructor.
 		 */
-		Instance();
+		Instance() = default;
 
 		/**
 		 * Refresh the screen titles.
 		 */
 		void refreshTitles();
+
+		/**
+		 * Refresh the screens.
+		 * This will refresh all the titles and recreate the screens vector.
+		 * 
+		 * @return The screens that were just created.
+		 */
+		QVector<Screen>& refreshScreens();
 
 		/**
 		 * Get the screens from the instance.

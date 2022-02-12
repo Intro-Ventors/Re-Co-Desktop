@@ -2,6 +2,8 @@
 
 #include <QMainWindow>
 
+#include "../Scipper/Instance.hpp"
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -30,6 +32,13 @@ namespace GUI
 		~MainWindow();
 
 	private:
+		/**
+		 * Setup screens to be displayed.
+		 */
+		void setupScreens();
+
+	private:
 		Ui::MainWindow* p_MainWindow = nullptr;
+		Scipper::Instance m_Instance = {};
 	};
 }

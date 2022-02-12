@@ -34,12 +34,6 @@ namespace Scipper
 		void dummyMouseChangeHandler(const SL::Screen_Capture::Image*, const SL::Screen_Capture::MousePoint&) {}
 	}
 
-	Instance::Instance()
-	{
-		// Refresh the titles to get the current titles.
-		refreshTitles();
-	}
-
 	void Instance::refreshTitles()
 	{
 		// Clear the screen titles if data is present.
@@ -88,5 +82,23 @@ namespace Scipper
 			auto lock = std::unique_lock(resourceMutex);
 			condition.wait(lock, [&bState] { return bState; });
 		}
+	}
+
+	QVector<Screen>& Instance::refreshScreens()
+	{
+		// Refresh all the titles so we get the latest ones.
+		refreshTitles();
+
+		// Clear the screens if they are not empty.
+		if (!m_Screens.empty())
+			m_Screens.clear();
+
+		// Create all the new screens.
+		//for (auto& title : m_ScreenTitles)
+		//	m_Screens.emplace_back(QString(title));
+
+		m_Screens.emplace_back("");
+
+		return m_Screens;
 	}
 }

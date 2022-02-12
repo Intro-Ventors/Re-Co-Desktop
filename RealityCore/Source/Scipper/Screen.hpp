@@ -14,7 +14,7 @@ namespace Scipper
 	 */
 	class Screen final : public RScreenCapture
 	{
-		using ScreenCaptureConfig = std::shared_ptr<SL::Screen_Capture::ICaptureConfiguration<SL::Screen_Capture::WindowCaptureCallback>>;
+		using ScreenCaptureConfig = std::shared_ptr<SL::Screen_Capture::IScreenCaptureManager>;
 
 	public:
 		/**
