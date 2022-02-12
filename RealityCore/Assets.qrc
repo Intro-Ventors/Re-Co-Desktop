@@ -1,6 +1,6 @@
 <RCC>
     <qresource prefix="/">
-        <file>Assets/TemporaryLoadingScreen.gif</file>
-        <file>Assets/SplashScreen.gif</file>
+        <file>Assets/2D/Re-Co Logo.png</file>
+        <file>Assets/2D/SplashScreen.gif</file>
     </qresource>
 </RCC>

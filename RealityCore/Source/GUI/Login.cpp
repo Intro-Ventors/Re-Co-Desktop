@@ -14,7 +14,7 @@ namespace GUI
 		p_Login->setupUi(this);
 
 		// Create and assign the movie to the label.
-		auto pMovie = new QMovie(":/Assets/SplashScreen.gif");
+		auto pMovie = new QMovie(":/Assets/2D/SplashScreen.gif");
 		p_Login->movie->setMovie(pMovie);
 
 		// Set the size of the movie and start playing.

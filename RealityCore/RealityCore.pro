@@ -19,7 +19,7 @@ SOURCES +=                                      \
                                                 \
     Source/Scipper/Instance.cpp                 \
     Source/Scipper/RScreenCapture.cpp           \
-    Source/Scipper/Screen.cpp                   \
+    Source/Scipper/Screen.cpp
 
 HEADERS +=                                      \
     Source/GUI/MainWindow.h                     \
@@ -29,7 +29,7 @@ HEADERS +=                                      \
                                                 \
     Source/Scipper/Instance.hpp                 \
     Source/Scipper/RScreenCapture.hpp           \
-    Source/Scipper/Screen.hpp                   \
+    Source/Scipper/Screen.hpp
 
 FORMS +=                                        \
     Source/GUI/Forms/MainWindow.ui              \

@@ -33,6 +33,6 @@ namespace GUI
 		void onFrameChange(int frameNumber);
 
 	private:
-		QMovie m_Movie = QMovie(":/Assets/SplashScreen.gif");
+		QMovie m_Movie = QMovie(":/Assets/2D/SplashScreen.gif");
 	};
 }
