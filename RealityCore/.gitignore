@@ -1,4 +1,4 @@
-# Dont include the Qt build and solution files.
+# Don't include the Qt build and solution files.
 build-*
 ui_**.h
 **.stash

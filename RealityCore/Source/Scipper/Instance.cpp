@@ -1,6 +1,5 @@
 #include "Instance.hpp"
 
-#include <ScreenCapture.h>
 #include <condition_variable>
 
 namespace Scipper
