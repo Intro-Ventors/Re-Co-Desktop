@@ -42,6 +42,8 @@ RESOURCES +=                                    \
 INCLUDEPATH +=                                  \
     ThirdParty/screen_capture_lite/include
 
+RC_ICONS = "Assets/2D/Re-Co Logo.ico"
+
 win32:debug {
     LIBS += -L"ThirdParty/screen_capture_lite/src_cpp/Debug" -lscreen_capture_lite_shared
 

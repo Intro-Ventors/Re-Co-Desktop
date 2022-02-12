@@ -1,0 +1,5 @@
+# Dont include the Qt build and solution files.
+build-*
+ui_**.h
+**.stash
+*.rc

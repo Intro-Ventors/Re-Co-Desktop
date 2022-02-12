@@ -23,6 +23,9 @@ namespace GUI
 				auto pAbout = new About();
 				pAbout->show();
 			});
+
+		// Set the window icon.
+		setWindowIcon(QIcon(":Assets/2D/Re-Co Logo.ico"));
 	}
 
 	MainWindow::~MainWindow()
