@@ -1,7 +1,8 @@
-#include "MainWindow.h"
+#include "MainWindow.hpp"
 #include "../../ui_MainWindow.h"
 
-#include "About.h"
+#include "About.hpp"
+#include "ScreenWidget.hpp"
 
 namespace GUI
 {
@@ -36,9 +37,16 @@ namespace GUI
 		// Deleted the allocated window.
 		delete p_MainWindow;
 	}
-	
+
 	void MainWindow::setupScreens()
 	{
 		auto& screens = m_Instance.refreshScreens();
+
+		for (const auto& screen : screens)
+		{
+			auto pWidget = new ScreenWidget(this);
+			pWidget->setScreen(screen);
+			p_MainWindow->verticalLayout->addWidget(pWidget);
+		}
 	}
 }

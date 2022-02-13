@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Screen.hpp"
+#include <vector>
 #include <QVector>
 
 namespace Scipper
@@ -26,23 +27,17 @@ namespace Scipper
 		 * Refresh the screens.
 		 * This will refresh all the titles and recreate the screens vector.
 		 * 
+		 * @param limit The screen limit.
 		 * @return The screens that were just created.
 		 */
-		QVector<Screen>& refreshScreens();
+		std::vector<std::shared_ptr<Screen>>& refreshScreens(int limit = 5);
 
 		/**
 		 * Get the screens from the instance.
 		 *
 		 * @return The screens vector.
 		 */
-		QVector<Screen> getScreens() const { return m_Screens; }
-
-		/**
-		 * Get the screens from the instance.
-		 *
-		 * @return The screens vector.
-		 */
-		QVector<Screen>& getScreens() { return m_Screens; }
+		std::vector<std::shared_ptr<Screen>>& getScreens() { return m_Screens; }
 
 		/**
 		 * Get all the screen titles.
@@ -59,7 +54,7 @@ namespace Scipper
 		QVector<QString>& getScreenTitles() { return m_ScreenTitles; }
 
 	private:
-		QVector<Screen> m_Screens;
+		std::vector<std::shared_ptr<Screen>> m_Screens;
 		QVector<QString> m_ScreenTitles;
 	};
 }

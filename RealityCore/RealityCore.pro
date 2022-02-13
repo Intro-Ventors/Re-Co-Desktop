@@ -22,10 +22,10 @@ SOURCES +=                                      \
     Source/Scipper/Screen.cpp
 
 HEADERS +=                                      \
-    Source/GUI/MainWindow.h                     \
-    Source/GUI/SplashScreen.h                   \
-    Source/GUI/About.h                          \
-    Source/GUI/Login.h                          \
+    Source/GUI/MainWindow.hpp                   \
+    Source/GUI/SplashScreen.hpp                 \
+    Source/GUI/About.hpp                        \
+    Source/GUI/Login.hpp                        \
                                                 \
     Source/Scipper/Instance.hpp                 \
     Source/Scipper/RScreenCapture.hpp           \

@@ -1,6 +1,6 @@
-#include "GUI/MainWindow.h"
-#include "GUI/SplashScreen.h"
-#include "GUI/Login.h"
+#include "GUI/MainWindow.hpp"
+#include "GUI/SplashScreen.hpp"
+#include "GUI/Login.hpp"
 
 #include <QApplication>
 #include <QTimer>

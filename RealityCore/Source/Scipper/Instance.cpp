@@ -84,7 +84,7 @@ namespace Scipper
 		}
 	}
 
-	QVector<Screen>& Instance::refreshScreens()
+	std::vector<std::shared_ptr<Screen>>& Instance::refreshScreens(int limit)
 	{
 		// Refresh all the titles so we get the latest ones.
 		refreshTitles();
@@ -94,10 +94,14 @@ namespace Scipper
 			m_Screens.clear();
 
 		// Create all the new screens.
-		//for (auto& title : m_ScreenTitles)
-		//	m_Screens.emplace_back(QString(title));
-
-		m_Screens.emplace_back("");
+		for (auto& title : m_ScreenTitles)
+		{
+			if (!title.isEmpty() && limit > 0)
+			{
+				m_Screens.emplace_back(std::make_shared<Screen>(title));
+				limit--;
+			}
+		}
 
 		return m_Screens;
 	}

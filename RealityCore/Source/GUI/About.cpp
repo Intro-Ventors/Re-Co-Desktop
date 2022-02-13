@@ -1,4 +1,4 @@
-#include "About.h"
+#include "About.hpp"
 #include "../../ui_About.h"
 
 namespace GUI
