@@ -25,9 +25,13 @@ namespace GUI
 		// If the image is present, lets set it to the label.
 		if (m_Image)
 		{
+			// Create the image using the image data.
 			auto image = QImage(m_Image->p_ImageData.get(), m_Image->m_Width, m_Image->m_Height, QImage::Format::Format_RGBA8888);
+
+			// Scale it down a little.
 			image.scaled(QSize(854, 480));
 
+			// Set the image as a pixmap.
 			p_Screen->frame->setPixmap(QPixmap::fromImage(image));
 		}
 		QWidget::paintEvent(pEvent);
