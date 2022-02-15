@@ -8,7 +8,8 @@ namespace GUI
 {
 	MainWindow::MainWindow(QWidget* pParent)
 		: QMainWindow(pParent)
-		, p_MainWindow(new Ui::MainWindow)
+		, p_MainWindow(new Ui::MainWindow())
+		, p_ScrollArea(new QScrollArea(this))
 	{
 		// Setup the UI.
 		p_MainWindow->setupUi(this);
@@ -28,6 +29,10 @@ namespace GUI
 		// Set the window icon.
 		setWindowIcon(QIcon(":Assets/2D/Re-Co Logo.ico"));
 
+		// Add the scroll area widget.
+		//p_MainWindow->verticalLayout->addWidget(p_ScrollArea);
+		setCentralWidget(p_ScrollArea);
+
 		// Setup the screens.
 		setupScreens();
 	}
@@ -42,11 +47,15 @@ namespace GUI
 	{
 		auto& screens = m_Instance.refreshScreens();
 
+		QVBoxLayout* pBoxLayout = new QVBoxLayout(p_ScrollArea);
+
 		for (const auto& screen : screens)
 		{
-			auto pWidget = new ScreenWidget(this);
-			pWidget->setScreen(screen);
-			p_MainWindow->verticalLayout->addWidget(pWidget);
+			auto pScreenWidget = new ScreenWidget(this);
+			pScreenWidget->setScreen(screen);
+			pBoxLayout->addWidget(pScreenWidget);
 		}
+
+		//p_ScrollArea->setWidget(pWindow);
 	}
 }

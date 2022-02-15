@@ -2,7 +2,8 @@
 
 #include <condition_variable>
 #include <semaphore>
-#include <QPixmap>
+
+#include <lodepng.h>
 
 namespace Scipper
 {
@@ -60,53 +61,94 @@ namespace Scipper
 
 	void Screen::onFrameChanged(const SL::Screen_Capture::Image& image, const SL::Screen_Capture::Window& window)
 	{
-		image;
-		window;
+		Q_UNUSED(image);
+		Q_UNUSED(window);
 	}
 
 	void Screen::onNewFrame(const SL::Screen_Capture::Image& image, const SL::Screen_Capture::Window& window)
 	{
+		Q_UNUSED(window);
+
+		// Compute the time delta.
+		const auto tick = Clock::now();
+		const auto delta = tick.time_since_epoch() - m_TimePoint.time_since_epoch();
+
+		// Convert the image.
+		auto pImageData = convertRGBA(image, delta.count());
+
+		// Convert the image to the PNG format and return its value.
+		const auto encodedImage = convertPNG(pImageData.get());
+
 		// If we can record, convert the image data to RGBA and then send it to the receiving end.
 		if (b_ShouldRecord)
 		{
 			// Convert the image.
-			convertRGBA(image);
+			p_ImageData = std::move(pImageData);
 
 			// Emit the new frame signal.
 			emit newFrame(p_ImageData);
 
+			// Toggle should record bool.
 			b_ShouldRecord = false;
 		}
+		else
+		{
+			// Get the delta time.
+			p_ImageData->m_DeltaTime = delta.count();
+		}
+
+		// Make sure to free the allocated memory.
+		std::free(encodedImage.p_Data);
+
+		m_TimePoint = tick;
 	}
 
 	void Screen::onMouseChanged(const SL::Screen_Capture::Image* pImage, const SL::Screen_Capture::MousePoint& mousePoint)
 	{
-		pImage;
-		mousePoint;
+		Q_UNUSED(pImage);
+		Q_UNUSED(mousePoint);
 	}
 
-	void Screen::convertRGBA(const SL::Screen_Capture::Image& image)
+	std::shared_ptr<ImageData> Screen::convertRGBA(const SL::Screen_Capture::Image& image, const uint64_t delta)
 	{
+		// Get the width and height of the image.
 		const auto width = Width(image);
 		const auto height = Height(image);
-		p_ImageData = std::make_shared<ImageData>(std::make_shared<uchar[]>(width * height * 4), width, height);
 
+		// Create the new image data.
+		auto pImageData = std::make_shared<ImageData>(std::make_shared<uchar[]>(width * height * 4), width, height, delta);
 
-		auto imgsrc = StartSrc(image);
-		auto imgdist = p_ImageData->p_ImageData.get();
+		// Iterate through the image data and convert the data from BGRA to RGBA.
+		auto pImageSource = StartSrc(image);
+		auto pImageDestination = pImageData->p_ImageData.get();
 		for (auto h = 0; h < height; h++)
 		{
-			auto startimgsrc = imgsrc;
+			auto pStartImageSource = pImageSource;
 			for (auto w = 0; w < width; w++)
 			{
-				*imgdist++ = imgsrc->R;
-				*imgdist++ = imgsrc->G;
-				*imgdist++ = imgsrc->B;
-				*imgdist++ = imgsrc->A;
-				imgsrc++;
+				*pImageDestination++ = pImageSource->R;
+				*pImageDestination++ = pImageSource->G;
+				*pImageDestination++ = pImageSource->B;
+				*pImageDestination++ = pImageSource->A;
+				pImageSource++;
 			}
 
-			imgsrc = SL::Screen_Capture::GotoNextRow(image, startimgsrc);
+			pImageSource = SL::Screen_Capture::GotoNextRow(image, pStartImageSource);
 		}
+
+		return pImageData;
+	}
+	
+	EncodedImage Screen::convertPNG(const ImageData* pImageData)
+	{
+		EncodedImage image = {};
+
+		// Encode the data. If it was successful, the return would be zero. If not it'll be any other value.
+		if (lodepng_encode_memory(&image.p_Data, &image.m_Size, pImageData->p_ImageData.get(), pImageData->m_Width, pImageData->m_Height, LodePNGColorType::LCT_RGBA, 8))
+		{
+			// Handle the error.
+		}
+
+		return image;
 	}
 }

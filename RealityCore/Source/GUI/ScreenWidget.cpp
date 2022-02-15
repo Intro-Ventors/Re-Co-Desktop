@@ -29,11 +29,16 @@ namespace GUI
 			auto image = QImage(m_Image->p_ImageData.get(), m_Image->m_Width, m_Image->m_Height, QImage::Format::Format_RGBA8888);
 
 			// Scale it down a little.
-			image.scaled(QSize(854, 480));
+			image = image.scaled(QSize(854, 480));
 
 			// Set the image as a pixmap.
 			p_Screen->frame->setPixmap(QPixmap::fromImage(image));
+
+			// Set the delta time.
+			p_Screen->time->setText("Delta time: " + QString::number(m_Image->m_DeltaTime) + " ns (" + QString::number(1000000000 / m_Image->m_DeltaTime) + " FPS)");
 		}
+
+		// Paint everything with the default painting.
 		QWidget::paintEvent(pEvent);
 
 		// Toggle the record so the screen capturing API can record a new image.

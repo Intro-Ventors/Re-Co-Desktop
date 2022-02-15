@@ -1,6 +1,8 @@
 #pragma once
 
 #include <QMainWindow>
+#include <QScrollArea>
+#include <QVBoxLayout>
 
 #include "../Scipper/Instance.hpp"
 
@@ -39,6 +41,8 @@ namespace GUI
 
 	private:
 		Ui::MainWindow* p_MainWindow = nullptr;
+		QScrollArea* p_ScrollArea = nullptr;
+		QVBoxLayout* p_VBoxLayout = nullptr;
 		Scipper::Instance m_Instance = {};
 	};
 }

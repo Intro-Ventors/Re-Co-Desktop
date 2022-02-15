@@ -9,12 +9,28 @@
 
 namespace Scipper
 {
+	/**
+	 * Image data struct.
+	 * This structure contains the information needed to render the image to the widget.
+	 */
 	struct ImageData
 	{
-		ImageData(const std::shared_ptr<uchar[]>& pData, uint32_t width, uint32_t height) : p_ImageData(std::move(pData)), m_Width(width), m_Height(height) {}
+		ImageData(const std::shared_ptr<uchar[]>& pData, uint32_t width, uint32_t height, uint64_t delta = 0) : p_ImageData(std::move(pData)), m_Width(width), m_Height(height), m_DeltaTime(delta) {}
+
 		std::shared_ptr<uchar[]> p_ImageData = nullptr;
+		uint64_t m_DeltaTime = 0;
 		uint32_t m_Width = 0;
 		uint32_t m_Height = 0;
+	};
+
+	/**
+	 * Encoded image struct.
+	 * This struct contains the information regarding the PNG encoded image.
+	 */
+	struct EncodedImage
+	{
+		uchar* p_Data = nullptr;
+		size_t m_Size = 0;
 	};
 
 	/**
@@ -24,9 +40,12 @@ namespace Scipper
 	class Screen final : public QObject, public RScreenCapture
 	{
 		Q_OBJECT
-			using ScreenCaptureConfig = std::shared_ptr<SL::Screen_Capture::IScreenCaptureManager>;
 
 	public:
+		using ScreenCaptureConfig = std::shared_ptr<SL::Screen_Capture::IScreenCaptureManager>;
+		using Clock = std::chrono::high_resolution_clock;
+		using TimePoint = std::chrono::time_point<Clock>;
+
 		/**
 		 * Constructor.
 		 *
@@ -77,9 +96,18 @@ namespace Scipper
 		 * Convert the BGRA image to RGBA.
 		 *
 		 * @param image The image reference.
+		 * @param delta The time delta between the current frame and the old frame.
 		 * @return The converted data.
 		 */
-		void convertRGBA(const SL::Screen_Capture::Image& image);
+		static std::shared_ptr<ImageData> convertRGBA(const SL::Screen_Capture::Image& image, const uint64_t delta);
+
+		/**
+		 * Convert the incoming image data to a PNG format.
+		 *
+		 * @param pImageData The image data to encode.
+		 * @return The encoded image.
+		 */
+		static EncodedImage convertPNG(const ImageData* pImageData);
 
 	private:
 		QString m_Name;
@@ -87,5 +115,6 @@ namespace Scipper
 		ScreenCaptureConfig p_Configuration = nullptr;
 		std::atomic<bool> b_ShouldRecord = true;
 		std::shared_ptr<ImageData> p_ImageData = nullptr;
+		TimePoint m_TimePoint;
 	};
 }

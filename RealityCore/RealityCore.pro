@@ -16,16 +16,20 @@ SOURCES +=                                      \
     Source/GUI/SplashScreen.cpp                 \
     Source/GUI/About.cpp                        \
     Source/GUI/Login.cpp                        \
+    Source/GUI/ScreenWidget.cpp                 \
                                                 \
     Source/Scipper/Instance.cpp                 \
     Source/Scipper/RScreenCapture.cpp           \
-    Source/Scipper/Screen.cpp
+    Source/Scipper/Screen.cpp                   \
+                                                \
+    ThirdParty/lodepng/lodepng.cpp
 
 HEADERS +=                                      \
     Source/GUI/MainWindow.hpp                   \
     Source/GUI/SplashScreen.hpp                 \
     Source/GUI/About.hpp                        \
     Source/GUI/Login.hpp                        \
+    Source/GUI/ScreenWidget.hpp                 \
                                                 \
     Source/Scipper/Instance.hpp                 \
     Source/Scipper/RScreenCapture.hpp           \
@@ -34,13 +38,15 @@ HEADERS +=                                      \
 FORMS +=                                        \
     Source/GUI/Forms/MainWindow.ui              \
     Source/GUI/Forms/About.ui                   \
-    Source/GUI/Forms/Login.ui
+    Source/GUI/Forms/Login.ui                   \
+    Source/GUI/Forms/Screen.ui                  
 
 RESOURCES +=                                    \
     Assets.qrc
 
 INCLUDEPATH +=                                  \
-    ThirdParty/screen_capture_lite/include
+    ThirdParty/screen_capture_lite/include      \
+    ThirdParty/lodepng
 
 RC_ICONS = "Assets/2D/Re-Co Logo.ico"
 
