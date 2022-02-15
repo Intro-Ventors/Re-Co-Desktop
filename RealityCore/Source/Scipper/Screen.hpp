@@ -102,12 +102,29 @@ namespace Scipper
 		static std::shared_ptr<ImageData> convertRGBA(const SL::Screen_Capture::Image& image, const uint64_t delta);
 
 		/**
+		 * Convert the BGRA image to RGBA.
+		 *
+		 * @param image The image reference.
+		 * @param delta The time delta between the current frame and the old frame.
+		 * @return The converted data.
+		 */
+		static std::shared_ptr<ImageData> convertRGBA_Test(const SL::Screen_Capture::Image& image, const uint64_t delta);
+
+		/**
 		 * Convert the incoming image data to a PNG format.
 		 *
 		 * @param pImageData The image data to encode.
 		 * @return The encoded image.
 		 */
 		static EncodedImage convertPNG(const ImageData* pImageData);
+
+		/**
+		 * Convert the incoming image data to a PNG format.
+		 *
+		 * @param image The image data from the Screen Capture Lite API.
+		 * @return The encoded image.
+		 */
+		static EncodedImage convertPNG(const SL::Screen_Capture::Image& image);
 
 	private:
 		QString m_Name;

@@ -35,7 +35,7 @@ namespace GUI
 			p_Screen->frame->setPixmap(QPixmap::fromImage(image));
 
 			// Set the delta time.
-			p_Screen->time->setText("Delta time: " + QString::number(m_Image->m_DeltaTime) + " ns (" + QString::number(1000000000 / m_Image->m_DeltaTime) + " FPS)");
+			p_Screen->time->setText("Delta time: " + QString::number(m_Image->m_DeltaTime) + " ns (" + QString::number(1000 / m_Image->m_DeltaTime) + " FPS)");
 		}
 
 		// Paint everything with the default painting.

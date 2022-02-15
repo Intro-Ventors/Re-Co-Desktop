@@ -2,6 +2,7 @@
 
 #include <condition_variable>
 #include <semaphore>
+#include <future>
 
 #include <lodepng.h>
 
@@ -71,19 +72,30 @@ namespace Scipper
 
 		// Compute the time delta.
 		const auto tick = Clock::now();
-		const auto delta = tick.time_since_epoch() - m_TimePoint.time_since_epoch();
+		const auto delta = std::chrono::duration_cast<std::chrono::milliseconds>(tick.time_since_epoch() - m_TimePoint.time_since_epoch());
 
-		// Convert the image.
-		auto pImageData = convertRGBA(image, delta.count());
-
-		// Convert the image to the PNG format and return its value.
-		const auto encodedImage = convertPNG(pImageData.get());
+		// Asynchronously execute the encoding command.
+		//auto thread = std::thread([&image, this]
+		//	{
+		//		// Encode the image to PNG.
+		//		const auto encodedImage = convertPNG(image);
+		//
+		//		// Send the data to the client.
+		//
+		//		// Make sure to free the allocated memory afterwards.
+		//		std::free(encodedImage.p_Data);
+		//	}
+		//);
+		//
+		//thread.detach();
 
 		// If we can record, convert the image data to RGBA and then send it to the receiving end.
 		if (b_ShouldRecord)
 		{
 			// Convert the image.
-			p_ImageData = std::move(pImageData);
+				p_ImageData = std::move(convertRGBA(image, delta.count()));
+
+			p_ImageData->m_DeltaTime = delta.count();
 
 			// Emit the new frame signal.
 			emit newFrame(p_ImageData);
@@ -96,9 +108,6 @@ namespace Scipper
 			// Get the delta time.
 			p_ImageData->m_DeltaTime = delta.count();
 		}
-
-		// Make sure to free the allocated memory.
-		std::free(encodedImage.p_Data);
 
 		m_TimePoint = tick;
 	}
@@ -138,7 +147,17 @@ namespace Scipper
 
 		return pImageData;
 	}
-	
+
+	std::shared_ptr<ImageData> Screen::convertRGBA_Test(const SL::Screen_Capture::Image& image, const uint64_t delta)
+	{
+		// Get the width and height of the image.
+		const auto width = Width(image);
+		const auto height = Height(image);
+
+		// Create the new image data.
+		return std::make_shared<ImageData>(nullptr, 0, 0, delta);
+	}
+
 	EncodedImage Screen::convertPNG(const ImageData* pImageData)
 	{
 		EncodedImage image = {};
@@ -150,5 +169,18 @@ namespace Scipper
 		}
 
 		return image;
+	}
+
+	EncodedImage Screen::convertPNG(const SL::Screen_Capture::Image& image)
+	{
+		EncodedImage encodedImage = {};
+
+		// Encode the data. If it was successful, the return would be zero. If not it'll be any other value.
+		if (lodepng_encode_memory(&encodedImage.p_Data, &encodedImage.m_Size, reinterpret_cast<const uchar*>(StartSrc(image)), Width(image), Height(image), LodePNGColorType::LCT_RGBA, 8))
+		{
+			// Handle the error.
+		}
+
+		return encodedImage;
 	}
 }
