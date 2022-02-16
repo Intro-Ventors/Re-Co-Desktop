@@ -45,7 +45,7 @@ namespace GUI
 
 	void MainWindow::setupScreens()
 	{
-		auto& screens = m_Instance.refreshScreens(2);
+		auto& screens = m_Instance.refreshScreens();
 
 		QVBoxLayout* pBoxLayout = new QVBoxLayout(m_pScrollArea);
 

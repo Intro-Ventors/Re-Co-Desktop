@@ -13,8 +13,8 @@ namespace GUI
 		// Set the UI pointer as this.
 		m_pScreen->setupUi(this);
 
-		connect(&m_DuplicationThread, &Scipper::DuplicationThread::tick, this, &ScreenWidget::onTick);
-		connect(&m_DuplicationThread, &Scipper::DuplicationThread::image, this, &ScreenWidget::onImage);
+		//connect(&m_DuplicationThread, &Scipper::DuplicationThread::tick, this, &ScreenWidget::onTick);
+		//connect(&m_DuplicationThread, &Scipper::DuplicationThread::image, this, &ScreenWidget::onImage);
 	}
 
 	ScreenWidget::~ScreenWidget()
@@ -22,7 +22,7 @@ namespace GUI
 		// Delete the allocated memory.
 		delete m_pScreen;
 
-		m_DuplicationThread.terminate();
+		//m_DuplicationThread.terminate();
 	}
 
 	void ScreenWidget::paintEvent(QPaintEvent* pEvent)
@@ -58,7 +58,8 @@ namespace GUI
 			m_pScreen->frame->setPixmap(QPixmap::fromImage(image));
 
 			// Set the delta time.
-			m_pScreen->time->setText("Delta time: " + QString::number(m_pImage->m_DeltaTime) + " ms (" + QString::number(1000 / m_pImage->m_DeltaTime) + " FPS)");
+			if (m_pImage->m_DeltaTime > 0)
+				m_pScreen->time->setText("Delta time: " + QString::number(m_pImage->m_DeltaTime) + " ms (" + QString::number(1000 / m_pImage->m_DeltaTime) + " FPS)");
 		}
 
 		// Paint everything with the default painting.

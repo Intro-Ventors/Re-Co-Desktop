@@ -8,7 +8,6 @@ namespace Scipper
 {
 	DuplicationThread::DuplicationThread()
 	{
-		/*
 		m_Thread = std::jthread([this]
 			{
 				// Create the desktop duplication object.
@@ -69,6 +68,5 @@ namespace Scipper
 				}
 			}
 		);
-		*/
 	}
 }

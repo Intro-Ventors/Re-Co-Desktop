@@ -81,6 +81,15 @@ namespace Scipper
 			//return ProcessFailure(m_Device, L"Failed to get parent DXGI Adapter", L"Error", hr, SystemTransitionsExpectedErrors);
 		}
 
+		UINT i = 0;
+		IDXGIOutput* pOutput;
+		std::vector<IDXGIOutput*> vOutputs;
+		while (dxgiAdapter->EnumOutputs(i, &pOutput) != DXGI_ERROR_NOT_FOUND)
+		{
+			vOutputs.push_back(pOutput);
+			++i;
+		}
+
 		// Get output
 		IDXGIOutput* dxgiOutput = nullptr;
 		result = dxgiAdapter->EnumOutputs(m_FrameNumber, &dxgiOutput);

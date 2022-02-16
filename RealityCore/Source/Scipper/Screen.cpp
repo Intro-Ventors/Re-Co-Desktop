@@ -54,7 +54,7 @@ namespace Scipper
 		)->start_capturing();
 
 		using namespace std::chrono_literals;
-		m_pConfiguration->setFrameChangeInterval(35ms);
+		m_pConfiguration->setFrameChangeInterval(16ms);
 
 		// Wait till the thread has completed execution.
 		std::mutex mutex;
@@ -129,23 +129,24 @@ namespace Scipper
 		// Create the new image data.
 		auto pImageData = std::make_shared<ImageData>(std::vector<RGBA8>(width * height), width, height, delta);
 
-		// Iterate through the image data and convert the data from BGRA to RGBA.
+		// Get the image source.
 		auto pImageSource = StartSrc(image);
 
 		// Transform the image from BGRA to RGBA using the parallel policy.
-		std::transform(std::execution::parallel_unsequenced_policy(), pImageSource, pImageSource + (width * height), pImageData->p_ImageData.begin(), [](const SL::Screen_Capture::ImageBGRA& lhs)
+		std::transform(std::execution::parallel_unsequenced_policy(), pImageSource, pImageSource + (width * height), pImageData->p_ImageData.begin(), [](const SL::Screen_Capture::ImageBGRA& source)
 			{
-				RGBA8 rhs = {};
-				rhs.R = lhs.R;
-				rhs.G = lhs.G;
-				rhs.B = lhs.B;
-				rhs.A = lhs.A;
+				RGBA8 destination = {};
+				destination.R = source.R;
+				destination.G = source.G;
+				destination.B = source.B;
+				destination.A = source.A;
 
-				return rhs;
+				return destination;
 			}
 		);
 
 		return pImageData;
+		__m128;
 	}
 
 	std::shared_ptr<ImageData> Screen::convertRGBA_Test(const SL::Screen_Capture::Image& image, const uint64_t delta)
