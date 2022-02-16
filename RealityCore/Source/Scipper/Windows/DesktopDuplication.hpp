@@ -24,6 +24,8 @@ namespace Scipper
 		DesktopDuplication();
 		~DesktopDuplication();
 
+		Bitmap capture();
+
 	private:
 		DXGI_OUTPUT_DESC m_OutputDesc;
 		Bitmap m_Bitmap = {};
