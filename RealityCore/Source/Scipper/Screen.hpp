@@ -56,7 +56,7 @@ namespace Scipper
 		/**
 		 * Toggle the record boolean.
 		 */
-		void toggleRecord() { b_ShouldRecord = true; }
+		void toggleRecord() { m_bShouldRecord = true; }
 
 	signals:
 		/**
@@ -129,9 +129,9 @@ namespace Scipper
 	private:
 		QString m_Name;
 		QImage m_Image;
-		ScreenCaptureConfig p_Configuration = nullptr;
-		std::atomic<bool> b_ShouldRecord = true;
-		std::shared_ptr<ImageData> p_ImageData = nullptr;
+		ScreenCaptureConfig m_pConfiguration = nullptr;
+		std::atomic<bool> m_bShouldRecord = true;
+		std::shared_ptr<ImageData> m_pImageData = nullptr;
 		TimePoint m_TimePoint;
 	};
 }

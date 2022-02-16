@@ -63,7 +63,7 @@ namespace GUI
 		void onSignUp();
 
 	private:
-		Ui::Login* p_Login = nullptr;
+		Ui::Login* m_pLogin = nullptr;
 	};
 }
 

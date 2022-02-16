@@ -15,7 +15,7 @@ namespace Scipper
 		std::condition_variable conditional = {};
 
 		// Create the capture configuration.
-		p_Configuration = SL::Screen_Capture::CreateCaptureConfiguration([&conditional, this]() -> std::vector<SL::Screen_Capture::Window>
+		m_pConfiguration = SL::Screen_Capture::CreateCaptureConfiguration([&conditional, this]() -> std::vector<SL::Screen_Capture::Window>
 			{
 				// Get the windows.
 				const auto windows = SL::Screen_Capture::GetWindows();
@@ -52,7 +52,7 @@ namespace Scipper
 		)->start_capturing();
 
 		using namespace std::chrono_literals;
-		p_Configuration->setFrameChangeInterval(35ms);
+		m_pConfiguration->setFrameChangeInterval(35ms);
 
 		// Wait till the thread has completed execution.
 		std::mutex mutex;
@@ -90,23 +90,23 @@ namespace Scipper
 		//thread.detach();
 
 		// If we can record, convert the image data to RGBA and then send it to the receiving end.
-		if (b_ShouldRecord)
+		if (m_bShouldRecord)
 		{
 			// Convert the image.
-				p_ImageData = std::move(convertRGBA(image, delta.count()));
+			m_pImageData = std::move(convertRGBA(image, delta.count()));
 
-			p_ImageData->m_DeltaTime = delta.count();
+			m_pImageData->m_DeltaTime = delta.count();
 
 			// Emit the new frame signal.
-			emit newFrame(p_ImageData);
+			emit newFrame(m_pImageData);
 
 			// Toggle should record bool.
-			b_ShouldRecord = false;
+			m_bShouldRecord = false;
 		}
 		else
 		{
 			// Get the delta time.
-			p_ImageData->m_DeltaTime = delta.count();
+			m_pImageData->m_DeltaTime = delta.count();
 		}
 
 		m_TimePoint = tick;

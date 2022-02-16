@@ -8,58 +8,55 @@ namespace GUI
 {
 	ScreenWidget::ScreenWidget(QWidget* pParent)
 		: QWidget(pParent)
-		, p_Screen(new Ui::Screen())
+		, m_pScreen(new Ui::Screen())
 	{
 		// Set the UI pointer as this.
-		p_Screen->setupUi(this);
+		m_pScreen->setupUi(this);
 	}
 
 	ScreenWidget::~ScreenWidget()
 	{
 		// Delete the allocated memory.
-		delete p_Screen;
+		delete m_pScreen;
 	}
 
 	void ScreenWidget::paintEvent(QPaintEvent* pEvent)
 	{
 		// If the image is present, lets set it to the label.
-		if (m_Image)
+		if (m_pImage)
 		{
 			// Create the image using the image data.
-			auto image = QImage(m_Image->p_ImageData.get(), m_Image->m_Width, m_Image->m_Height, QImage::Format::Format_RGBA8888);
-
-			// Scale it down a little.
-			image = image.scaled(QSize(854, 480));
+			auto image = QImage(m_pImage->p_ImageData.get(), m_pImage->m_Width, m_pImage->m_Height, QImage::Format::Format_RGBA8888);
 
 			// Set the image as a pixmap.
-			p_Screen->frame->setPixmap(QPixmap::fromImage(image));
+			m_pScreen->frame->setPixmap(QPixmap::fromImage(image.scaled(QSize(854, 480))));
 
 			// Set the delta time.
-			p_Screen->time->setText("Delta time: " + QString::number(m_Image->m_DeltaTime) + " ns (" + QString::number(1000 / m_Image->m_DeltaTime) + " FPS)");
+			m_pScreen->time->setText("Delta time: " + QString::number(m_pImage->m_DeltaTime) + " ms (" + QString::number(1000 / m_pImage->m_DeltaTime) + " FPS)");
 		}
 
 		// Paint everything with the default painting.
 		QWidget::paintEvent(pEvent);
 
 		// Toggle the record so the screen capturing API can record a new image.
-		p_ScipperScreen->toggleRecord();
+		m_pScipperScreen->toggleRecord();
 	}
 
 	void ScreenWidget::setScreen(std::shared_ptr<Scipper::Screen> pScreen)
 	{
-		p_ScipperScreen = pScreen;
+		m_pScipperScreen = pScreen;
 
 		// Set the connection.
-		connect(p_ScipperScreen.get(), &Scipper::Screen::newFrame, this, &ScreenWidget::onNewFrame);
+		connect(m_pScipperScreen.get(), &Scipper::Screen::newFrame, this, &ScreenWidget::onNewFrame);
 	}
 
 	QLabel* ScreenWidget::getLabel() const
 	{
-		return p_Screen->frame;
+		return m_pScreen->frame;
 	}
 
 	void ScreenWidget::onNewFrame(std::shared_ptr<Scipper::ImageData> image)
 	{
-		m_Image = image;
+		m_pImage = image;
 	}
 }

@@ -30,6 +30,6 @@ namespace GUI
 		~About();
 
 	private:
-		Ui::About* p_About = nullptr;
+		Ui::About* m_pAbout = nullptr;
 	};
 }

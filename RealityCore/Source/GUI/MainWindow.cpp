@@ -8,15 +8,15 @@ namespace GUI
 {
 	MainWindow::MainWindow(QWidget* pParent)
 		: QMainWindow(pParent)
-		, p_MainWindow(new Ui::MainWindow())
-		, p_ScrollArea(new QScrollArea(this))
+		, m_pMainWindow(new Ui::MainWindow())
+		, m_pScrollArea(new QScrollArea(this))
 	{
 		// Setup the UI.
-		p_MainWindow->setupUi(this);
+		m_pMainWindow->setupUi(this);
 
 		// Create the help menu and add them to the menu.
-		QMenu* pMenu = new QMenu("Help", p_MainWindow->menubar);
-		p_MainWindow->menubar->addMenu(pMenu);
+		QMenu* pMenu = new QMenu("Help", m_pMainWindow->menubar);
+		m_pMainWindow->menubar->addMenu(pMenu);
 
 		// Add the about action.
 		pMenu->addAction("About", [this]
@@ -31,7 +31,7 @@ namespace GUI
 
 		// Add the scroll area widget.
 		//p_MainWindow->verticalLayout->addWidget(p_ScrollArea);
-		setCentralWidget(p_ScrollArea);
+		setCentralWidget(m_pScrollArea);
 
 		// Setup the screens.
 		setupScreens();
@@ -40,14 +40,14 @@ namespace GUI
 	MainWindow::~MainWindow()
 	{
 		// Deleted the allocated window.
-		delete p_MainWindow;
+		delete m_pMainWindow;
 	}
 
 	void MainWindow::setupScreens()
 	{
 		auto& screens = m_Instance.refreshScreens(1);
 
-		QVBoxLayout* pBoxLayout = new QVBoxLayout(p_ScrollArea);
+		QVBoxLayout* pBoxLayout = new QVBoxLayout(m_pScrollArea);
 
 		for (const auto& screen : screens)
 		{

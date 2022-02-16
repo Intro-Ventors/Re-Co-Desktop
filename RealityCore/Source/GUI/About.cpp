@@ -5,16 +5,16 @@ namespace GUI
 {
 	About::About(QWidget* pParent)
 		: QWidget(pParent)
-		, p_About(new Ui::About())
+		, m_pAbout(new Ui::About())
 	{
 		// Setup the UI.
-		p_About->setupUi(this);
+		m_pAbout->setupUi(this);
 	}
 
 	About::~About()
 	{
 		// Delete the allocated pointer.
-		delete p_About;
+		delete m_pAbout;
 
 		// Yeah this is not the best thing to do but you can do this because there is no other way.
 		delete this;

@@ -8,14 +8,14 @@ namespace GUI
 {
 	Login::Login(QWidget* pParent)
 		: QDialog(pParent, Qt::FramelessWindowHint)
-		, p_Login(new Ui::Login())
+		, m_pLogin(new Ui::Login())
 	{
 		// Setup the UI.
-		p_Login->setupUi(this);
+		m_pLogin->setupUi(this);
 
 		// Create and assign the movie to the label.
 		auto pMovie = new QMovie(":/Assets/2D/SplashScreen.gif");
-		p_Login->movie->setMovie(pMovie);
+		m_pLogin->movie->setMovie(pMovie);
 
 		// Set the size of the movie and start playing.
 		pMovie->setScaledSize(QSize(480, 270));
@@ -25,31 +25,31 @@ namespace GUI
 		setStyleSheet("background-color: black;");
 
 		// Setup connections.
-		connect(p_Login->signIn, &QPushButton::pressed, this, &Login::onSignIn);
-		connect(p_Login->signUp, &QPushButton::pressed, this, &Login::onSignUp);
+		connect(m_pLogin->signIn, &QPushButton::pressed, this, &Login::onSignIn);
+		connect(m_pLogin->signUp, &QPushButton::pressed, this, &Login::onSignUp);
 	}
 
 	Login::~Login()
 	{
 		// Delete the allocated memory.
-		delete p_Login;
+		delete m_pLogin;
 	}
 
 	QString Login::getUsername() const
 	{
-		return p_Login->username->text();
+		return m_pLogin->username->text();
 	}
 
 	QByteArray Login::getPassword() const
 	{
 		// Hash and return the hashed bytes.
-		return QCryptographicHash::hash(p_Login->password->text().toLocal8Bit(), QCryptographicHash::Sha3_512);
+		return QCryptographicHash::hash(m_pLogin->password->text().toLocal8Bit(), QCryptographicHash::Sha3_512);
 	}
 
 	void Login::clearInput()
 	{
-		p_Login->username->clear();
-		p_Login->password->clear();
+		m_pLogin->username->clear();
+		m_pLogin->password->clear();
 	}
 
 	void Login::onSignIn()

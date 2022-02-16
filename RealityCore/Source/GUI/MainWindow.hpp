@@ -40,9 +40,9 @@ namespace GUI
 		void setupScreens();
 
 	private:
-		Ui::MainWindow* p_MainWindow = nullptr;
-		QScrollArea* p_ScrollArea = nullptr;
-		QVBoxLayout* p_VBoxLayout = nullptr;
+		Ui::MainWindow* m_pMainWindow = nullptr;
+		QScrollArea* m_pScrollArea = nullptr;
+		QVBoxLayout* m_pVBoxLayout = nullptr;
 		Scipper::Instance m_Instance = {};
 	};
 }

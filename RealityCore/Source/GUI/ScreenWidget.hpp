@@ -63,8 +63,8 @@ namespace GUI
 		void onNewFrame(std::shared_ptr<Scipper::ImageData> image);
 
 	private:
-		std::shared_ptr<Scipper::Screen> p_ScipperScreen = nullptr;
-		std::shared_ptr<Scipper::ImageData> m_Image = nullptr;
-		Ui::Screen* p_Screen = nullptr;
+		std::shared_ptr<Scipper::Screen> m_pScipperScreen = nullptr;
+		std::shared_ptr<Scipper::ImageData> m_pImage = nullptr;
+		Ui::Screen* m_pScreen = nullptr;
 	};
 }
