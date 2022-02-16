@@ -9,15 +9,17 @@
 
 namespace Scipper
 {
+	struct RGBA8 { uint8_t R, G, B, A; };
+
 	/**
 	 * Image data struct.
 	 * This structure contains the information needed to render the image to the widget.
 	 */
 	struct ImageData
 	{
-		ImageData(const std::shared_ptr<uchar[]>& pData, uint32_t width, uint32_t height, uint64_t delta = 0) : p_ImageData(std::move(pData)), m_Width(width), m_Height(height), m_DeltaTime(delta) {}
+		ImageData(const std::vector<RGBA8>& pData, uint32_t width, uint32_t height, uint64_t delta = 0) : p_ImageData(std::move(pData)), m_Width(width), m_Height(height), m_DeltaTime(delta) {}
 
-		std::shared_ptr<uchar[]> p_ImageData = nullptr;
+		std::vector<RGBA8> p_ImageData = {};
 		uint64_t m_DeltaTime = 0;
 		uint32_t m_Width = 0;
 		uint32_t m_Height = 0;

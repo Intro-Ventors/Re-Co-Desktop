@@ -3,8 +3,10 @@
 #include <QWidget>
 #include <QLabel>
 #include <mutex>
+#include <atomic>
 
 #include "../Scipper/Screen.hpp"
+#include "../Scipper/Windows/DuplicationThread.hpp"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Screen; }
@@ -62,9 +64,16 @@ namespace GUI
 		 */
 		void onNewFrame(std::shared_ptr<Scipper::ImageData> image);
 
+		void onTick(std::chrono::nanoseconds delta);
+		void onImage(const Scipper::DuplicationImage& image);
+
 	private:
+		Scipper::DuplicationImage m_DuplicationImage;
+		std::atomic<std::chrono::nanoseconds> m_Delta;
+
 		std::shared_ptr<Scipper::Screen> m_pScipperScreen = nullptr;
 		std::shared_ptr<Scipper::ImageData> m_pImage = nullptr;
 		Ui::Screen* m_pScreen = nullptr;
+		Scipper::DuplicationThread m_DuplicationThread;
 	};
 }

@@ -9,11 +9,15 @@
 #include <d3d11.h>
 #include <dxgi1_2.h>
 
+#include "../Screen.hpp"
+
 namespace Scipper
 {
+	struct BGRA8 { uint8_t B, G, R, A; };
+
 	struct Bitmap
 	{
-		std::vector<uint8_t> m_Buffer = {};
+		std::vector<BGRA8> m_Buffer = {};
 		uint32_t m_Width = 0;
 		uint32_t m_Height = 0;
 	};

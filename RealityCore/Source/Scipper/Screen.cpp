@@ -3,6 +3,8 @@
 #include <condition_variable>
 #include <semaphore>
 #include <future>
+#include <algorithm>
+#include <execution>
 
 #include <lodepng.h>
 
@@ -121,29 +123,27 @@ namespace Scipper
 	std::shared_ptr<ImageData> Screen::convertRGBA(const SL::Screen_Capture::Image& image, const uint64_t delta)
 	{
 		// Get the width and height of the image.
-		const auto width = Width(image);
-		const auto height = Height(image);
+		const size_t width = Width(image);
+		const size_t height = Height(image);
 
 		// Create the new image data.
-		auto pImageData = std::make_shared<ImageData>(std::make_shared<uchar[]>(width * height * 4), width, height, delta);
+		auto pImageData = std::make_shared<ImageData>(std::vector<RGBA8>(width * height), width, height, delta);
 
 		// Iterate through the image data and convert the data from BGRA to RGBA.
 		auto pImageSource = StartSrc(image);
-		auto pImageDestination = pImageData->p_ImageData.get();
-		for (auto h = 0; h < height; h++)
-		{
-			auto pStartImageSource = pImageSource;
-			for (auto w = 0; w < width; w++)
-			{
-				*pImageDestination++ = pImageSource->R;
-				*pImageDestination++ = pImageSource->G;
-				*pImageDestination++ = pImageSource->B;
-				*pImageDestination++ = pImageSource->A;
-				pImageSource++;
-			}
 
-			pImageSource = SL::Screen_Capture::GotoNextRow(image, pStartImageSource);
-		}
+		// Transform the image from BGRA to RGBA using the parallel policy.
+		std::transform(std::execution::parallel_unsequenced_policy(), pImageSource, pImageSource + (width * height), pImageData->p_ImageData.begin(), [](const SL::Screen_Capture::ImageBGRA& lhs)
+			{
+				RGBA8 rhs = {};
+				rhs.R = lhs.R;
+				rhs.G = lhs.G;
+				rhs.B = lhs.B;
+				rhs.A = lhs.A;
+
+				return rhs;
+			}
+		);
 
 		return pImageData;
 	}
@@ -151,11 +151,11 @@ namespace Scipper
 	std::shared_ptr<ImageData> Screen::convertRGBA_Test(const SL::Screen_Capture::Image& image, const uint64_t delta)
 	{
 		// Get the width and height of the image.
-		const auto width = Width(image);
-		const auto height = Height(image);
+		//const auto width = Width(image);
+		//const auto height = Height(image);
 
 		// Create the new image data.
-		return std::make_shared<ImageData>(nullptr, 0, 0, delta);
+		return std::make_shared<ImageData>(std::vector<RGBA8>(), 0, 0, delta);
 	}
 
 	EncodedImage Screen::convertPNG(const ImageData* pImageData)
@@ -163,7 +163,7 @@ namespace Scipper
 		EncodedImage image = {};
 
 		// Encode the data. If it was successful, the return would be zero. If not it'll be any other value.
-		if (lodepng_encode_memory(&image.p_Data, &image.m_Size, pImageData->p_ImageData.get(), pImageData->m_Width, pImageData->m_Height, LodePNGColorType::LCT_RGBA, 8))
+		if (lodepng_encode_memory(&image.p_Data, &image.m_Size, reinterpret_cast<const uint8_t*>(pImageData->p_ImageData.data()), pImageData->m_Width, pImageData->m_Height, LodePNGColorType::LCT_RGBA, 8))
 		{
 			// Handle the error.
 		}
