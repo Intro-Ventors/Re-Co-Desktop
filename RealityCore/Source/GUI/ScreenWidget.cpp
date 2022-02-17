@@ -8,7 +8,7 @@ namespace GUI
 {
 	ScreenWidget::ScreenWidget(QWidget* pParent)
 		: QWidget(pParent)
-		, m_pScreen(new Ui::Screen())
+		, m_pScreen(new Ui::Window())
 	{
 		// Set the UI pointer as this.
 		m_pScreen->setupUi(this);
@@ -66,15 +66,15 @@ namespace GUI
 		QWidget::paintEvent(pEvent);
 
 		// Toggle the record so the screen capturing API can record a new image.
-		m_pScipperScreen->toggleRecord();
+		m_pScipperWindow->toggleRecord();
 	}
 
-	void ScreenWidget::setScreen(std::shared_ptr<Scipper::Screen> pScreen)
+	void ScreenWidget::setWindow(std::shared_ptr<Scipper::Window> pWindow)
 	{
-		m_pScipperScreen = pScreen;
+		m_pScipperWindow = pWindow;
 
 		// Set the connection.
-		connect(m_pScipperScreen.get(), &Scipper::Screen::newFrame, this, &ScreenWidget::onNewFrame);
+		connect(m_pScipperWindow.get(), &Scipper::Window::newFrame, this, &ScreenWidget::onNewFrame);
 	}
 
 	QLabel* ScreenWidget::getLabel() const

@@ -34,7 +34,7 @@ namespace GUI
 		setCentralWidget(m_pScrollArea);
 
 		// Setup the screens.
-		setupScreens();
+		setupWindows();
 	}
 
 	MainWindow::~MainWindow()
@@ -43,16 +43,16 @@ namespace GUI
 		delete m_pMainWindow;
 	}
 
-	void MainWindow::setupScreens()
+	void MainWindow::setupWindows()
 	{
-		auto& screens = m_Instance.refreshScreens();
+		auto& windows = m_Instance.refreshWindows();
 
 		QVBoxLayout* pBoxLayout = new QVBoxLayout(m_pScrollArea);
 
-		for (const auto& screen : screens)
+		for (const auto& window : windows)
 		{
 			auto pScreenWidget = new ScreenWidget(this);
-			pScreenWidget->setScreen(screen);
+			pScreenWidget->setWindow(window);
 			pBoxLayout->addWidget(pScreenWidget);
 		}
 

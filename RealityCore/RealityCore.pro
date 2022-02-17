@@ -20,7 +20,9 @@ SOURCES +=                                      \
                                                 \
     Source/Scipper/Instance.cpp                 \
     Source/Scipper/RScreenCapture.cpp           \
-    Source/Scipper/Screen.cpp                   \
+    Source/Scipper/Window.cpp                   \
+    Source/Scipper/Monitor.cpp                  \
+    Source/Scipper/FrameCapture.cpp             \
                                                 \
     ThirdParty/lodepng/lodepng.cpp
 
@@ -33,7 +35,9 @@ HEADERS +=                                      \
                                                 \
     Source/Scipper/Instance.hpp                 \
     Source/Scipper/RScreenCapture.hpp           \
-    Source/Scipper/Screen.hpp
+    Source/Scipper/Window.hpp                   \
+    Source/Scipper/Monitor.hpp                  \
+    Source/Scipper/FrameCapture.hpp             
 
 FORMS +=                                        \
     Source/GUI/Forms/MainWindow.ui              \

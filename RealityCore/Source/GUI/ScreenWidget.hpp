@@ -5,17 +5,17 @@
 #include <mutex>
 #include <atomic>
 
-#include "../Scipper/Screen.hpp"
+#include "../Scipper/Window.hpp"
 #include "../Scipper/Windows/DuplicationThread.hpp"
 
 QT_BEGIN_NAMESPACE
-namespace Ui { class Screen; }
+namespace Ui { class Window; }
 QT_END_NAMESPACE
 
 namespace GUI
 {
 	/**
-	 * Screen widget object.
+	 * Window widget object.
 	 * This object is used to render a single image to the user.
 	 */
 	class ScreenWidget : public QWidget
@@ -37,21 +37,21 @@ namespace GUI
 
 		/**
 		 * Override the paint event function.
-		 * 
+		 *
 		 * @param pEvent The event pointer.
 		 */
 		void paintEvent(QPaintEvent* pEvent) override;
 
 		/**
 		 * Set a screen object pointer to the widget.
-		 * 
-		 * @param pScreen The screen object pointer.
+		 *
+		 * @param pWindow The screen object pointer.
 		 */
-		void setScreen(std::shared_ptr<Scipper::Screen> pScreen);
+		void setWindow(std::shared_ptr<Scipper::Window> pWindow);
 
 		/**
 		 * Get the label pointer of the screen widget.
-		 * 
+		 *
 		 * @return The label pointer.
 		 */
 		QLabel* getLabel() const;
@@ -71,9 +71,9 @@ namespace GUI
 		Scipper::DuplicationImage m_DuplicationImage;
 		std::atomic<std::chrono::nanoseconds> m_Delta;
 
-		std::shared_ptr<Scipper::Screen> m_pScipperScreen = nullptr;
+		std::shared_ptr<Scipper::Window> m_pScipperWindow = nullptr;
 		std::shared_ptr<Scipper::ImageData> m_pImage = nullptr;
-		Ui::Screen* m_pScreen = nullptr;
-		Scipper::DuplicationThread m_DuplicationThread;
+		Ui::Window* m_pScreen = nullptr;
+		//Scipper::DuplicationThread m_DuplicationThread;
 	};
 }

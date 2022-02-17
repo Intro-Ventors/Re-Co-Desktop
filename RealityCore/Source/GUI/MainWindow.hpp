@@ -35,9 +35,9 @@ namespace GUI
 
 	private:
 		/**
-		 * Setup screens to be displayed.
+		 * Setup windows to be displayed.
 		 */
-		void setupScreens();
+		void setupWindows();
 
 	private:
 		Ui::MainWindow* m_pMainWindow = nullptr;

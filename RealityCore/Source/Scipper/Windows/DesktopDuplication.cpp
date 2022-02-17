@@ -87,6 +87,10 @@ namespace Scipper
 		while (dxgiAdapter->EnumOutputs(i, &pOutput) != DXGI_ERROR_NOT_FOUND)
 		{
 			vOutputs.push_back(pOutput);
+
+			DXGI_OUTPUT_DESC desc;
+			pOutput->GetDesc(&desc);
+
 			++i;
 		}
 
@@ -140,7 +144,7 @@ namespace Scipper
 			m_pDevice->Release();
 	}
 
-	Bitmap DesktopDuplication::capture()
+	Bitmap& DesktopDuplication::capture()
 	{
 		if (!m_pDesktopDuplication)
 			return m_Bitmap;
