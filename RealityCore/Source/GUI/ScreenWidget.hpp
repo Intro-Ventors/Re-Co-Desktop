@@ -6,7 +6,6 @@
 #include <atomic>
 
 #include "../Scipper/FrameCapture.hpp"
-#include "../Scipper/Windows/DuplicationThread.hpp"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Window; }
@@ -64,16 +63,10 @@ namespace GUI
 		 */
 		void onNewFrame(std::shared_ptr<Scipper::ImageData> image);
 
-		void onTick(std::chrono::nanoseconds delta);
-		void onImage(const Scipper::DuplicationImage& image);
-
 	private:
-		Scipper::DuplicationImage m_DuplicationImage;
 		std::atomic<std::chrono::nanoseconds> m_Delta;
-
 		std::shared_ptr<Scipper::FrameCapture> m_pFrameCapture = nullptr;
 		std::shared_ptr<Scipper::ImageData> m_pImage = nullptr;
 		Ui::Window* m_pScreen = nullptr;
-		//Scipper::DuplicationThread m_DuplicationThread;
 	};
 }
