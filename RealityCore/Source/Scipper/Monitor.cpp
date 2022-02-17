@@ -66,10 +66,7 @@ namespace Scipper
 		if (m_bShouldRecord)
 		{
 			// Convert the image.
-			if (!m_pImageData)
-				m_pImageData = std::move(convertRGBA_Test(image, delta.count()));
-
-			m_pImageData->m_DeltaTime = delta.count();
+			m_pImageData = std::move(convertRGBA(image, delta.count()));
 
 			// Emit the new frame signal.
 			emit newFrame(m_pImageData);

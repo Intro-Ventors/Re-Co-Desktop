@@ -5,7 +5,7 @@
 #include <mutex>
 #include <atomic>
 
-#include "../Scipper/Window.hpp"
+#include "../Scipper/FrameCapture.hpp"
 #include "../Scipper/Windows/DuplicationThread.hpp"
 
 QT_BEGIN_NAMESPACE
@@ -43,11 +43,11 @@ namespace GUI
 		void paintEvent(QPaintEvent* pEvent) override;
 
 		/**
-		 * Set a screen object pointer to the widget.
+		 * Set a frame capture object pointer to the widget.
 		 *
-		 * @param pWindow The screen object pointer.
+		 * @param pFrameCapture The frame capture object pointer.
 		 */
-		void setWindow(std::shared_ptr<Scipper::Window> pWindow);
+		void setFrameCapture(std::shared_ptr<Scipper::FrameCapture> pFrameCapture);
 
 		/**
 		 * Get the label pointer of the screen widget.
@@ -71,7 +71,7 @@ namespace GUI
 		Scipper::DuplicationImage m_DuplicationImage;
 		std::atomic<std::chrono::nanoseconds> m_Delta;
 
-		std::shared_ptr<Scipper::Window> m_pScipperWindow = nullptr;
+		std::shared_ptr<Scipper::FrameCapture> m_pFrameCapture = nullptr;
 		std::shared_ptr<Scipper::ImageData> m_pImage = nullptr;
 		Ui::Window* m_pScreen = nullptr;
 		//Scipper::DuplicationThread m_DuplicationThread;

@@ -66,15 +66,15 @@ namespace GUI
 		QWidget::paintEvent(pEvent);
 
 		// Toggle the record so the screen capturing API can record a new image.
-		m_pScipperWindow->toggleRecord();
+		m_pFrameCapture->toggleRecord();
 	}
 
-	void ScreenWidget::setWindow(std::shared_ptr<Scipper::Window> pWindow)
+	void ScreenWidget::setFrameCapture(std::shared_ptr<Scipper::FrameCapture> pFrameCapture)
 	{
-		m_pScipperWindow = pWindow;
+		m_pFrameCapture = pFrameCapture;
 
 		// Set the connection.
-		connect(m_pScipperWindow.get(), &Scipper::Window::newFrame, this, &ScreenWidget::onNewFrame);
+		connect(m_pFrameCapture.get(), &Scipper::FrameCapture::newFrame, this, &ScreenWidget::onNewFrame);
 	}
 
 	QLabel* ScreenWidget::getLabel() const

@@ -45,17 +45,22 @@ namespace GUI
 
 	void MainWindow::setupWindows()
 	{
-		auto& windows = m_Instance.refreshWindows();
-
 		QVBoxLayout* pBoxLayout = new QVBoxLayout(m_pScrollArea);
 
-		for (const auto& window : windows)
+		//auto& windows = m_Instance.refreshWindows();
+		//for (const auto& window : windows)
+		//{
+		//	auto pScreenWidget = new ScreenWidget(this);
+		//	pScreenWidget->setFrameCapture(window);
+		//	pBoxLayout->addWidget(pScreenWidget);
+		//}
+
+		auto& monitors = m_Instance.refreshMonitors();
+		for (const auto& monitor : monitors)
 		{
 			auto pScreenWidget = new ScreenWidget(this);
-			pScreenWidget->setWindow(window);
+			pScreenWidget->setFrameCapture(monitor);
 			pBoxLayout->addWidget(pScreenWidget);
 		}
-
-		//p_ScrollArea->setWidget(pWindow);
 	}
 }

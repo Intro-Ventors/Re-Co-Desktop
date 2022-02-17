@@ -63,11 +63,11 @@ namespace Scipper
 			m_Monitors.clear();
 
 		// Create all the new monitors.
-		for (auto& title : m_WindowTitles)
+		for (auto& title : m_MonitorTitles)
 		{
 			if (!title.isEmpty())
 			{
-				m_Monitors.emplace_back(std::make_shared<Window>(title));
+				m_Monitors.emplace_back(std::make_shared<Monitor>(title));
 			}
 		}
 
