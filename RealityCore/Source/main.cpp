@@ -11,27 +11,26 @@ int main(int argc, char* argv[])
 	QApplication application(argc, argv);
 
 	// Create the window instance.
-	GUI::MainWindow window = {};
+	auto window = GUI::MainWindow();
 
-	// Create the login dialog.
-	auto pLogin = new GUI::Login();
+	// Create the splash screen object.
+	auto splashScreen = GUI::SplashScreen();
 
-	// Connect the finished signal to our slot.
-	QObject::connect(pLogin, &QDialog::finished, [&window, pLogin](int result)
+	// Show the splash screen.
+	splashScreen.show();
+
+	// Create a timer to simulate loading. This is not needed if the application takes a longer time to load assets.
+	// But this is added because the application loads fairly quickly. We wait for 5 seconds before closing it.
+	using namespace std::chrono_literals;
+	QTimer::singleShot(5s, [&]
 		{
-			// Accepted means that the user has pressed sign in.
-			if (result == QDialog::Accepted)
-			{
-				// Show the window to the user.
-				window.show();
-			}
+			// Show the main window.
+			window.show();
 
-			// Else we can just skip and close the application.
-			delete pLogin;
-		});
-
-	// Show the login dialog.
-	pLogin->show();
+			// Finish the splash screen by passing the control to the main window.
+			splashScreen.finish(&window);
+		}
+	);
 
 	// Execute the application.
 	return application.exec();
