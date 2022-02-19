@@ -17,6 +17,7 @@ SOURCES +=                                                  \
     Source/GUI/About.cpp                                    \
     Source/GUI/Login.cpp                                    \
     Source/GUI/ScreenWidget.cpp                             \
+    Source/GUI/Authentication.cpp                           \
                                                             \
     Source/Scipper/Instance.cpp                             \
     Source/Scipper/RScreenCapture.cpp                       \
@@ -33,6 +34,7 @@ HEADERS +=                                                  \
     Source/GUI/About.hpp                                    \
     Source/GUI/Login.hpp                                    \
     Source/GUI/ScreenWidget.hpp                             \
+    Source/GUI/Authentication.hpp                           \
                                                             \
     Source/Scipper/Instance.hpp                             \
     Source/Scipper/RScreenCapture.hpp                       \
@@ -44,7 +46,8 @@ FORMS +=                                                    \
     Source/GUI/Forms/MainWindow.ui                          \
     Source/GUI/Forms/About.ui                               \
     Source/GUI/Forms/Login.ui                               \
-    Source/GUI/Forms/Screen.ui                              
+    Source/GUI/Forms/Screen.ui                              \
+    Source/GUI/Forms/Authentication.ui                              
 
 RESOURCES +=                                                \
     Assets.qrc
