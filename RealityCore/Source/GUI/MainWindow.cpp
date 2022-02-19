@@ -66,8 +66,14 @@ namespace GUI
 		// Add the about action.
 		pMenu->addAction("Authenticate", [this]
 			{
+				// Generate the OTP. This is here for debugging purposes.
+				const auto password = GenerateOTP();
+
 				// Create the widget and show it to the user.
-				auto pWidget = new Authentication("Testing...");
+				// This QR code will contain the IPv4 address to where the device should connect to. It contains the IP address, port and 
+				// the authentication password. The format will look like the following.
+				// 127.0.0.1:8080#OTP
+				auto pWidget = new Authentication(IPAndPortToString("127.0.0.1", 8080) + "#" + password.toBase64());
 				pWidget->show();
 			});
 	}

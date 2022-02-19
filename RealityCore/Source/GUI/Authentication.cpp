@@ -2,9 +2,30 @@
 #include "../../ui_Authentication.h"
 
 #include <qrcodegen.hpp>
+#include <QCryptographicHash>
+#include <random>
 
 namespace GUI
 {
+	QString IPAndPortToString(QString IP, unsigned int port)
+	{
+		return IP + ":" + QString::number(port);
+	}
+
+	QByteArray GenerateOTP(unsigned char rootLength)
+	{
+		// Create the random engine to create the random sequence.
+		std::default_random_engine randomEngine;
+
+		// Create a random byte array.
+		QByteArray byteArray;
+		for (unsigned char i = 0; i < rootLength; i++)
+			byteArray.append(static_cast<char>(randomEngine() % 128));
+
+		// Hash the byte array and return the result as the OTP.
+		return QCryptographicHash::hash(byteArray, QCryptographicHash::Algorithm::Sha1);
+	}
+
 	Authentication::Authentication(QString message, QWidget* pParent)
 		: QWidget(pParent)
 		, m_pAuthentication(new Ui::Authentication())

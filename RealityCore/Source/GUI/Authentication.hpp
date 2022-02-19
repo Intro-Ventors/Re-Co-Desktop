@@ -9,6 +9,23 @@ QT_END_NAMESPACE
 namespace GUI
 {
 	/**
+	 * Convert the IP address and the port number to a string.
+	 * 
+	 * @param IP The IP address.
+	 * @param port The port number.
+	 * @return The converted string.
+	 */
+	QString IPAndPortToString(QString IP, unsigned int port);
+
+	/**
+	 * Generate an one time password.
+	 * 
+	 * @param rootLength The length of the random sequence from which the password is generated from. This has no effect on the output length.
+	 * @return The byte array.
+	 */
+	QByteArray GenerateOTP(unsigned char rootLength = 8);
+
+	/**
 	 * Authentication class.
 	 * This class is the controller for the authentication form, and is used to generate the QR code required for authentication.
 	 */
