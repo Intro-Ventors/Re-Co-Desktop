@@ -35,6 +35,16 @@ namespace GUI
 
 	private:
 		/**
+		 * Create the about menu.
+		 */
+		void setupAboutMenu();
+
+		/**
+		 * Create the login menu.
+		 */
+		void setupLoginMenu();
+
+		/**
 		 * Setup windows to be displayed.
 		 */
 		void setupWindows();

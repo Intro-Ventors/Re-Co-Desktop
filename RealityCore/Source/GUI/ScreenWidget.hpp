@@ -8,7 +8,7 @@
 #include "../Scipper/FrameCapture.hpp"
 
 QT_BEGIN_NAMESPACE
-namespace Ui { class Window; }
+namespace Ui { class Screen; }
 QT_END_NAMESPACE
 
 namespace GUI
@@ -67,6 +67,6 @@ namespace GUI
 		std::atomic<std::chrono::nanoseconds> m_Delta;
 		std::shared_ptr<Scipper::FrameCapture> m_pFrameCapture = nullptr;
 		std::shared_ptr<Scipper::ImageData> m_pImage = nullptr;
-		Ui::Window* m_pScreen = nullptr;
+		Ui::Screen* m_pScreen = nullptr;
 	};
 }

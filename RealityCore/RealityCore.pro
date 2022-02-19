@@ -1,56 +1,58 @@
-QT +=                                           \
-    core                                        \
-    gui                                         \
+QT +=                                                       \
+    core                                                    \
+    gui                                                     \
 
 greaterThan(QT_MAJOR_VERSION, 5): QT += widgets
 
-CONFIG +=                                       \
-    c++2a                                       \
+CONFIG +=                                                   \
+    c++2a                                                   \
     file_copies
 
-DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
+DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000            # disables all the APIs deprecated before Qt 6.0.0
 
-SOURCES +=                                      \
-    Source/Main.cpp                             \
-    Source/GUI/MainWindow.cpp                   \
-    Source/GUI/SplashScreen.cpp                 \
-    Source/GUI/About.cpp                        \
-    Source/GUI/Login.cpp                        \
-    Source/GUI/ScreenWidget.cpp                 \
-                                                \
-    Source/Scipper/Instance.cpp                 \
-    Source/Scipper/RScreenCapture.cpp           \
-    Source/Scipper/Window.cpp                   \
-    Source/Scipper/Monitor.cpp                  \
-    Source/Scipper/FrameCapture.cpp             \
-                                                \
-    ThirdParty/lodepng/lodepng.cpp
+SOURCES +=                                                  \
+    Source/Main.cpp                                         \
+    Source/GUI/MainWindow.cpp                               \
+    Source/GUI/SplashScreen.cpp                             \
+    Source/GUI/About.cpp                                    \
+    Source/GUI/Login.cpp                                    \
+    Source/GUI/ScreenWidget.cpp                             \
+                                                            \
+    Source/Scipper/Instance.cpp                             \
+    Source/Scipper/RScreenCapture.cpp                       \
+    Source/Scipper/Window.cpp                               \
+    Source/Scipper/Monitor.cpp                              \
+    Source/Scipper/FrameCapture.cpp                         \
+                                                            \
+    ThirdParty/lodepng/lodepng.cpp                          \
+    ThirdParty/QR-Code-generator/cpp/qrcodegen.cpp
 
-HEADERS +=                                      \
-    Source/GUI/MainWindow.hpp                   \
-    Source/GUI/SplashScreen.hpp                 \
-    Source/GUI/About.hpp                        \
-    Source/GUI/Login.hpp                        \
-    Source/GUI/ScreenWidget.hpp                 \
-                                                \
-    Source/Scipper/Instance.hpp                 \
-    Source/Scipper/RScreenCapture.hpp           \
-    Source/Scipper/Window.hpp                   \
-    Source/Scipper/Monitor.hpp                  \
-    Source/Scipper/FrameCapture.hpp             
+HEADERS +=                                                  \
+    Source/GUI/MainWindow.hpp                               \
+    Source/GUI/SplashScreen.hpp                             \
+    Source/GUI/About.hpp                                    \
+    Source/GUI/Login.hpp                                    \
+    Source/GUI/ScreenWidget.hpp                             \
+                                                            \
+    Source/Scipper/Instance.hpp                             \
+    Source/Scipper/RScreenCapture.hpp                       \
+    Source/Scipper/Window.hpp                               \
+    Source/Scipper/Monitor.hpp                              \
+    Source/Scipper/FrameCapture.hpp
 
-FORMS +=                                        \
-    Source/GUI/Forms/MainWindow.ui              \
-    Source/GUI/Forms/About.ui                   \
-    Source/GUI/Forms/Login.ui                   \
-    Source/GUI/Forms/Screen.ui                  
+FORMS +=                                                    \
+    Source/GUI/Forms/MainWindow.ui                          \
+    Source/GUI/Forms/About.ui                               \
+    Source/GUI/Forms/Login.ui                               \
+    Source/GUI/Forms/Screen.ui                              
 
-RESOURCES +=                                    \
+RESOURCES +=                                                \
     Assets.qrc
 
-INCLUDEPATH +=                                  \
-    ThirdParty/screen_capture_lite/include      \
-    ThirdParty/lodepng
+INCLUDEPATH +=                                              \
+    ThirdParty/screen_capture_lite/include                  \
+    ThirdParty/lodepng                                      \
+    ThirdParty/QR-Code-generator/cpp
 
 RC_ICONS = "Assets/2D/Re-Co Logo.ico"
 

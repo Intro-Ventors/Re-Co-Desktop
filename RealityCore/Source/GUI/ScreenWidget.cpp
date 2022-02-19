@@ -8,7 +8,7 @@ namespace GUI
 {
 	ScreenWidget::ScreenWidget(QWidget* pParent)
 		: QWidget(pParent)
-		, m_pScreen(new Ui::Window())
+		, m_pScreen(new Ui::Screen())
 	{
 		// Set the UI pointer as this.
 		m_pScreen->setupUi(this);
@@ -28,11 +28,8 @@ namespace GUI
 			// Create the image using the image data.
 			auto image = QImage(reinterpret_cast<const uint8_t*>(m_pImage->p_ImageData.data()), m_pImage->m_Width, m_pImage->m_Height, QImage::Format::Format_RGBA8888);
 
-			// Scale it down a little.
-			image = image.scaled(QSize(854, 480));
-
-			// Set the image as a pixmap.
-			m_pScreen->frame->setPixmap(QPixmap::fromImage(image));
+			// Scale it down and set the image as a pixmap.
+			m_pScreen->frame->setPixmap(QPixmap::fromImage(image.scaled(QSize(854, 480))));
 
 			// Set the delta time.
 			if (m_pImage->m_DeltaTime > 0)

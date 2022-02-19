@@ -2,6 +2,7 @@
 #include "../../ui_MainWindow.h"
 
 #include "About.hpp"
+#include "Authentication.hpp"
 #include "ScreenWidget.hpp"
 
 namespace GUI
@@ -14,17 +15,11 @@ namespace GUI
 		// Setup the UI.
 		m_pMainWindow->setupUi(this);
 
-		// Create the help menu and add them to the menu.
-		QMenu* pMenu = new QMenu("Help", m_pMainWindow->menubar);
-		m_pMainWindow->menubar->addMenu(pMenu);
+		// Create the about menu.
+		setupAboutMenu();
 
-		// Add the about action.
-		pMenu->addAction("About", [this]
-			{
-				// Create the about window and show it to the user.
-				auto pAbout = new About();
-				pAbout->show();
-			});
+		// Create the login menu.
+		setupLoginMenu();
 
 		// Set the window icon.
 		setWindowIcon(QIcon(":Assets/2D/Re-Co Logo.ico"));
@@ -41,6 +36,40 @@ namespace GUI
 	{
 		// Deleted the allocated window.
 		delete m_pMainWindow;
+	}
+
+	void MainWindow::setupAboutMenu()
+	{
+		// Create the help menu and add them to the menu.
+		QMenu* pMenu = new QMenu("Help", m_pMainWindow->menubar);
+		m_pMainWindow->menubar->addMenu(pMenu);
+
+		// Add the about action.
+		pMenu->addAction("About", [this]
+			{
+				// Create the about window and show it to the user.
+				// auto pAbout = new About();
+				// pAbout->show();
+
+				// Create the widget and show it to the user.
+				auto pWidget = new About();
+				pWidget->show();
+			});
+	}
+
+	void MainWindow::setupLoginMenu()
+	{
+		// Create the help menu and add them to the menu.
+		QMenu* pMenu = new QMenu("Login", m_pMainWindow->menubar);
+		m_pMainWindow->menubar->addMenu(pMenu);
+
+		// Add the about action.
+		pMenu->addAction("Authenticate", [this]
+			{
+				// Create the widget and show it to the user.
+				auto pWidget = new Authentication("Testing...");
+				pWidget->show();
+			});
 	}
 
 	void MainWindow::setupWindows()

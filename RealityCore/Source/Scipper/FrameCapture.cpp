@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <execution>
+#include <future>
 
 #include <lodepng.h>
 
