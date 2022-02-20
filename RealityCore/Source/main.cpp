@@ -22,7 +22,7 @@ int main(int argc, char* argv[])
 	// Create a timer to simulate loading. This is not needed if the application takes a longer time to load assets.
 	// But this is added because the application loads fairly quickly. We wait for 5 seconds before closing it.
 	using namespace std::chrono_literals;
-	QTimer::singleShot(5s, [&]
+	QTimer::singleShot(5s, [&window, &splashScreen]
 		{
 			// Show the main window.
 			window.show();

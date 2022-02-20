@@ -353,3 +353,7 @@ MigrationBackup/
 **/**.sln
 **/**.vcxproj
 **/**.vcxproj.filters
+
+# Do not include whatever in the Install directory. But make sure to include the installer script.
+Installer/
+!Installer/Installer.iss
