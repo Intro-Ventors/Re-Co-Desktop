@@ -18,6 +18,9 @@ namespace GUI
 	{
 		// Delete the allocated memory.
 		delete m_pScreen;
+
+		// Disconnect the connection.
+		disconnect(m_pFrameCapture.get(), &Scipper::FrameCapture::newFrame, this, &ScreenWidget::onNewFrame);
 	}
 
 	void ScreenWidget::paintEvent(QPaintEvent* pEvent)
@@ -45,7 +48,7 @@ namespace GUI
 
 	void ScreenWidget::setFrameCapture(std::shared_ptr<Scipper::FrameCapture> pFrameCapture)
 	{
-		m_pFrameCapture = pFrameCapture;
+		m_pFrameCapture = std::move(pFrameCapture);
 
 		// Set the connection.
 		connect(m_pFrameCapture.get(), &Scipper::FrameCapture::newFrame, this, &ScreenWidget::onNewFrame);

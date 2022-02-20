@@ -39,7 +39,7 @@ namespace GUI
 		);
 	}
 
-	int ApplicationGUI::run()
+	int ApplicationGUI::run() const
 	{
 		return m_Application.exec();
 	}
@@ -50,8 +50,11 @@ namespace GUI
 		m_pContextMenu = std::make_unique<QMenu>();
 
 		// Add the menu options.
-		m_pContextMenu->addAction(QIcon(":/Assets/2D/Exit.png"), "Exit", [this] 
+		m_pContextMenu->addAction(QIcon(":/Assets/2D/Exit.png"), "Exit", [this]
 			{
+				// Make the window a close-able widget.
+				m_Window.toggleCloseable();
+
 				// Close the main window.
 				m_Window.close();
 			}
@@ -70,8 +73,14 @@ namespace GUI
 
 		case QSystemTrayIcon::DoubleClick:
 			// If the window is not visible, maximize and show the window.
-			if (!m_Window.isVisible())
+			if (m_Window.isHidden())
+			{
+				// Show the window.
 				m_Window.showMaximized();
+
+				// Refresh the screens to be displayed.
+				m_Window.refreshScreens();
+			}
 
 			break;
 

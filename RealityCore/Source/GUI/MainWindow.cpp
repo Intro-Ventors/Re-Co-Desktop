@@ -3,9 +3,9 @@
 
 #include "About.hpp"
 #include "Authentication.hpp"
-#include "ScreenWidget.hpp"
 
 #include <QKeySequence>
+#include <QCloseEvent>
 
 namespace GUI
 {
@@ -36,14 +36,61 @@ namespace GUI
 
 	MainWindow::~MainWindow()
 	{
-		// Deleted the allocated window.
+		// Deleted the allocated memory.
+		delete m_pBoxLayout;
 		delete m_pMainWindow;
+	}
+
+	void MainWindow::closeEvent(QCloseEvent* pCloseEvent)
+	{
+		// Just hide this widget if not close-able.
+		if (m_bCloseable)
+			QMainWindow::closeEvent(pCloseEvent);
+
+		// Fully close if we can.
+		else
+		{
+			// Remove the screen widgets from the layout.
+			for (const auto& pWidget : m_ScreenWidgets)
+				m_pBoxLayout->removeWidget(pWidget.get());
+
+			// Clear them from the array.
+			m_ScreenWidgets.clear();
+
+			// Hide the window.
+			hide();
+
+			// Ignore the close event.
+			pCloseEvent->ignore();
+		}
+	}
+
+	void MainWindow::refreshScreens()
+	{
+		// Get the monitors.
+		const auto& monitors = m_Instance.getMonitors();
+
+		// Iterate over them and add them the layout.
+		for (const auto& monitor : monitors)
+		{
+			// Create the widget.
+			auto pScreenWidget = std::make_shared<ScreenWidget>(this);
+
+			// Set the frame capture.
+			pScreenWidget->setFrameCapture(monitor);
+
+			// Add them to the box layout.
+			m_pBoxLayout->addWidget(pScreenWidget.get());
+
+			// Add them to the local vector.
+			m_ScreenWidgets.emplace_back(std::move(pScreenWidget));
+		}
 	}
 
 	void MainWindow::setupAboutMenu()
 	{
 		// Create the help menu and add them to the menu.
-		QMenu* pMenu = new QMenu("Help", m_pMainWindow->menubar);
+		auto pMenu = new QMenu("Help", m_pMainWindow->menubar);
 		m_pMainWindow->menubar->addMenu(pMenu);
 
 		// Add the about action.
@@ -53,14 +100,13 @@ namespace GUI
 				auto pWidget = new About();
 				pWidget->show();
 			},
-			QKeySequence("Ctrl+a")
-		);
+			QKeySequence("Ctrl+a"));
 	}
 
 	void MainWindow::setupLoginMenu()
 	{
 		// Create the help menu and add them to the menu.
-		QMenu* pMenu = new QMenu("Login", m_pMainWindow->menubar);
+		auto pMenu = new QMenu("Login", m_pMainWindow->menubar);
 		m_pMainWindow->menubar->addMenu(pMenu);
 
 		// Add the about action.
@@ -76,28 +122,30 @@ namespace GUI
 				auto pWidget = new Authentication(IPAndPortToString("127.0.0.1", 8080) + "#" + password.toBase64());
 				pWidget->show();
 			},
-			QKeySequence("Ctrl+l")
-		);
+			QKeySequence("Ctrl+l"));
 	}
 
 	void MainWindow::setupWindows()
 	{
-		QVBoxLayout* pBoxLayout = new QVBoxLayout(m_pScrollArea);
+		m_pBoxLayout = new QVBoxLayout(m_pScrollArea);
 
-		//auto& windows = m_Instance.refreshWindows();
-		//for (const auto& window : windows)
-		//{
-		//	auto pScreenWidget = new ScreenWidget(this);
-		//	pScreenWidget->setFrameCapture(window);
-		//	pBoxLayout->addWidget(pScreenWidget);
-		//}
+		// Refresh the monitors and get the vector.
+		const auto& monitors = m_Instance.refreshMonitors();
 
-		auto& monitors = m_Instance.refreshMonitors();
+		// Iterate over them and add them the layout.
 		for (const auto& monitor : monitors)
 		{
-			auto pScreenWidget = new ScreenWidget(this);
+			// Create the widget.
+			auto pScreenWidget = std::make_shared<ScreenWidget>(this);
+
+			// Set the frame capture.
 			pScreenWidget->setFrameCapture(monitor);
-			pBoxLayout->addWidget(pScreenWidget);
+
+			// Add them to the box layout.
+			m_pBoxLayout->addWidget(pScreenWidget.get());
+
+			// Add them to the local vector.
+			m_ScreenWidgets.emplace_back(std::move(pScreenWidget));
 		}
 	}
 }

@@ -10,6 +10,10 @@
 
 namespace GUI
 {
+	/**
+	 * Application GUI class.
+	 * This class contains the main GUI elements of Re-Co.
+	 */
 	class ApplicationGUI : public QObject
 	{
 		Q_OBJECT
@@ -29,7 +33,7 @@ namespace GUI
 		 *
 		 * @return The exit code.
 		 */
-		int run();
+		int run() const;
 
 	private slots:
 		/**
