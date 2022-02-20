@@ -10,7 +10,7 @@ namespace GUI
 {
 	/**
 	 * Convert the IP address and the port number to a string.
-	 * 
+	 *
 	 * @param IP The IP address.
 	 * @param port The port number.
 	 * @return The converted string.
@@ -19,7 +19,7 @@ namespace GUI
 
 	/**
 	 * Generate an one time password.
-	 * 
+	 *
 	 * @param rootLength The length of the random sequence from which the password is generated from. This has no effect on the output length.
 	 * @return The byte array.
 	 */
@@ -46,6 +46,20 @@ namespace GUI
 		 * Default destructor.
 		 */
 		~Authentication();
+
+		/**
+		 * Override the close event.
+		 *
+		 * @param pCloseEvent The close event pointer.
+		 */
+		void closeEvent(QCloseEvent* pCloseEvent) override;
+
+	signals:
+		/**
+		 * Authenticated signal.
+		 * This signal is emitted once a user has been authenticated with the server.
+		 */
+		void authenticated();
 
 	private:
 		Ui::Authentication* m_pAuthentication = nullptr;

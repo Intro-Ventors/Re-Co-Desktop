@@ -66,6 +66,12 @@ namespace GUI
 	{
 		// Delete the allocated memory.
 		delete m_pAuthentication;
+	}
+	
+	void Authentication::closeEvent(QCloseEvent* pCloseEvent)
+	{
+		// Call the default widget close event.
+		QWidget::closeEvent(pCloseEvent);
 
 		// This is bad but we have to do this.
 		delete this;

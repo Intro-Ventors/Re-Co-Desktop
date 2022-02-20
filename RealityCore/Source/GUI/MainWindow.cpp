@@ -5,12 +5,15 @@
 #include "Authentication.hpp"
 #include "ScreenWidget.hpp"
 
+#include <QKeySequence>
+
 namespace GUI
 {
-	MainWindow::MainWindow(QWidget* pParent)
+	MainWindow::MainWindow(Scipper::Instance& instance, QWidget* pParent)
 		: QMainWindow(pParent)
 		, m_pMainWindow(new Ui::MainWindow())
 		, m_pScrollArea(new QScrollArea(this))
+		, m_Instance(instance)
 	{
 		// Setup the UI.
 		m_pMainWindow->setupUi(this);
@@ -25,7 +28,6 @@ namespace GUI
 		setWindowIcon(QIcon(":Assets/2D/Re-Co Logo.ico"));
 
 		// Add the scroll area widget.
-		//p_MainWindow->verticalLayout->addWidget(p_ScrollArea);
 		setCentralWidget(m_pScrollArea);
 
 		// Setup the screens.
@@ -45,12 +47,14 @@ namespace GUI
 		m_pMainWindow->menubar->addMenu(pMenu);
 
 		// Add the about action.
-		pMenu->addAction("About", []
+		pMenu->addAction(QIcon(":/Assets/2D/About.png"), "About", []
 			{
 				// Create the widget and show it to the user.
 				auto pWidget = new About();
 				pWidget->show();
-			});
+			},
+			QKeySequence("Ctrl+a")
+		);
 	}
 
 	void MainWindow::setupLoginMenu()
@@ -60,7 +64,7 @@ namespace GUI
 		m_pMainWindow->menubar->addMenu(pMenu);
 
 		// Add the about action.
-		pMenu->addAction("Authenticate", []
+		pMenu->addAction(QIcon(":/Assets/2D/Authenticate.png"), "Authenticate", []
 			{
 				// Generate the OTP. This is here for debugging purposes.
 				const auto password = GenerateOTP();
@@ -71,7 +75,9 @@ namespace GUI
 				// 127.0.0.1:8080#OTP
 				auto pWidget = new Authentication(IPAndPortToString("127.0.0.1", 8080) + "#" + password.toBase64());
 				pWidget->show();
-			});
+			},
+			QKeySequence("Ctrl+l")
+		);
 	}
 
 	void MainWindow::setupWindows()

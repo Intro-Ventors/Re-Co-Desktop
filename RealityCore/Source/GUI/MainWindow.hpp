@@ -24,9 +24,10 @@ namespace GUI
 		/**
 		 * Constructor.
 		 *
+		 * @param instance The scipper instance.
 		 * @param pParent The parent object. Default is nullptr.
 		 */
-		MainWindow(QWidget* pParent = nullptr);
+		MainWindow(Scipper::Instance& instance, QWidget* pParent = nullptr);
 
 		/**
 		 * Default destructor.
@@ -53,6 +54,6 @@ namespace GUI
 		Ui::MainWindow* m_pMainWindow = nullptr;
 		QScrollArea* m_pScrollArea = nullptr;
 		QVBoxLayout* m_pVBoxLayout = nullptr;
-		Scipper::Instance m_Instance = {};
+		Scipper::Instance& m_Instance;
 	};
 }

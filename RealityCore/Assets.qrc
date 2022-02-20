@@ -3,5 +3,8 @@
         <file>Assets/2D/Re-Co Logo.png</file>
         <file>Assets/2D/SplashScreen.gif</file>
         <file>Assets/2D/Re-Co Logo.ico</file>
+        <file>Assets/2D/About.png</file>
+        <file>Assets/2D/Authenticate.png</file>
+        <file>Assets/2D/Exit.png</file>
     </qresource>
 </RCC>

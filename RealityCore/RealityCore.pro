@@ -18,6 +18,7 @@ SOURCES +=                                                  \
     Source/GUI/Login.cpp                                    \
     Source/GUI/ScreenWidget.cpp                             \
     Source/GUI/Authentication.cpp                           \
+    Source/GUI/ApplicationGUI.cpp                           \
                                                             \
     Source/Scipper/Instance.cpp                             \
     Source/Scipper/RScreenCapture.cpp                       \
@@ -35,6 +36,7 @@ HEADERS +=                                                  \
     Source/GUI/Login.hpp                                    \
     Source/GUI/ScreenWidget.hpp                             \
     Source/GUI/Authentication.hpp                           \
+    Source/GUI/ApplicationGUI.hpp                           \
                                                             \
     Source/Scipper/Instance.hpp                             \
     Source/Scipper/RScreenCapture.hpp                       \

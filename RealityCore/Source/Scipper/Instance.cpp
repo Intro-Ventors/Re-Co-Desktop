@@ -4,7 +4,7 @@
 
 namespace Scipper
 {
-	namespace
+	namespace /* anonymous */
 	{
 		/**
 		 * Dummy function to handle the new frame.

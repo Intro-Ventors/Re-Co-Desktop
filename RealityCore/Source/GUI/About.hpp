@@ -29,6 +29,13 @@ namespace GUI
 		 */
 		~About();
 
+		/**
+		 * Override the close event.
+		 *
+		 * @param pCloseEvent The close event pointer.
+		 */
+		void closeEvent(QCloseEvent* pCloseEvent) override;
+
 	private:
 		Ui::About* m_pAbout = nullptr;
 	};
