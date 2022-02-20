@@ -45,12 +45,8 @@ namespace GUI
 		m_pMainWindow->menubar->addMenu(pMenu);
 
 		// Add the about action.
-		pMenu->addAction("About", [this]
+		pMenu->addAction("About", []
 			{
-				// Create the about window and show it to the user.
-				// auto pAbout = new About();
-				// pAbout->show();
-
 				// Create the widget and show it to the user.
 				auto pWidget = new About();
 				pWidget->show();
@@ -64,7 +60,7 @@ namespace GUI
 		m_pMainWindow->menubar->addMenu(pMenu);
 
 		// Add the about action.
-		pMenu->addAction("Authenticate", [this]
+		pMenu->addAction("Authenticate", []
 			{
 				// Generate the OTP. This is here for debugging purposes.
 				const auto password = GenerateOTP();

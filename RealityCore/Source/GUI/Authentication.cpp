@@ -57,6 +57,9 @@ namespace GUI
 
 		// Now set the image as a pixmap to the label.
 		m_pAuthentication->image->setPixmap(QPixmap::fromImage(image.scaled(256, 256)));
+
+		// Don't let the user to resize the window.
+		setWindowFlag(Qt::MSWindowsFixedSizeDialogHint);
 	}
 
 	Authentication::~Authentication()

@@ -53,7 +53,7 @@ Generating the installer is automated and can be done using the following comman
 python Scripts/Installer.py
 ```
 
-Make sure that you specify where the Qt SDK is once the script prompts you to.
+Make sure that you have built the application the release mode and specify where the Qt SDK is once the script prompts you to.
 
 ## License
 
