@@ -94,11 +94,22 @@ namespace GUI
 		m_pMainWindow->menubar->addMenu(pMenu);
 
 		// Add the about action.
-		pMenu->addAction(QIcon(":/Assets/2D/About.png"), "About", []
+		pMenu->addAction(QIcon(":/Assets/2D/About.png"), "About", [this]
 			{
 				// Create the widget and show it to the user.
 				auto pWidget = new About();
 				pWidget->show();
+
+				// Connect the widget's destroyed signal to the lambda which will show this window maximized if hidden.
+				connect(pWidget, &About::destroyed, [this](QObject*) 
+					{
+						if (isHidden())
+						{
+							showMaximized();
+							refreshScreens();
+						}
+					}
+				);
 			},
 			QKeySequence("Ctrl+a"));
 	}
@@ -110,7 +121,7 @@ namespace GUI
 		m_pMainWindow->menubar->addMenu(pMenu);
 
 		// Add the about action.
-		pMenu->addAction(QIcon(":/Assets/2D/Authenticate.png"), "Authenticate", []
+		pMenu->addAction(QIcon(":/Assets/2D/Authenticate.png"), "Authenticate", [this]
 			{
 				// Generate the OTP. This is here for debugging purposes.
 				const auto password = GenerateOTP();
@@ -121,6 +132,17 @@ namespace GUI
 				// 127.0.0.1:8080#OTP
 				auto pWidget = new Authentication(IPAndPortToString("127.0.0.1", 8080) + "#" + password.toBase64());
 				pWidget->show();
+
+				// Connect the widget's destroyed signal to the lambda which will show this window maximized if hidden.
+				connect(pWidget, &About::destroyed, [this](QObject*)
+					{
+						if (isHidden())
+						{
+							showMaximized();
+							refreshScreens();
+						}
+					}
+				);
 			},
 			QKeySequence("Ctrl+l"));
 	}

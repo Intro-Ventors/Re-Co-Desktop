@@ -62,22 +62,26 @@ namespace Scipper
 		const auto tick = Clock::now();
 		const auto delta = std::chrono::duration_cast<std::chrono::milliseconds>(tick.time_since_epoch() - m_TimePoint.time_since_epoch());
 
-		// If we can record, convert the image data to RGBA and then send it to the receiving end.
-		if (m_bShouldRecord)
+		// Make sure to only convert and create the image if a slot is connected.
+		if (receivers(SIGNAL(newFrame(std::shared_ptr<ImageData>))) > 0)
 		{
-			// Convert the image.
-			m_pImageData = std::move(convertRGBA(image, delta.count()));
+			// If we can record, convert the image data to RGBA and then send it to the receiving end.
+			if (m_bShouldRecord)
+			{
+				// Convert the image.
+				m_pImageData = std::move(convertRGBA(image, delta.count()));
 
-			// Emit the new frame signal.
-			emit newFrame(m_pImageData);
+				// Emit the new frame signal.
+				emit newFrame(m_pImageData);
 
-			// Toggle should record bool.
-			m_bShouldRecord = false;
-		}
-		else
-		{
-			// Get the delta time.
-			m_pImageData->m_DeltaTime = delta.count();
+				// Toggle should record bool.
+				m_bShouldRecord = false;
+			}
+			else
+			{
+				// Get the delta time.
+				m_pImageData->m_DeltaTime = delta.count();
+			}
 		}
 
 		m_TimePoint = tick;
