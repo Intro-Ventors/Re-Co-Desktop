@@ -43,10 +43,11 @@ jobs:
         
     # Configure the Linux environment.
     - name: Setup Linux
-      if: startsWith(matrix.os, 'linux')
+      if: startsWith(matrix.os, 'ubuntu')
       uses: jurplel/install-qt-action@v2
       with:
         host: 'linux'
+        target: 'desktop'
         dir: '${{ github.workspace }}/Actions/Linux/'
         tools: 'tools_ifw tools_qtcreator,qt.tools.qtcreator'
         install-deps: 'true'
@@ -57,7 +58,8 @@ jobs:
       if: startsWith(matrix.os, 'macos')
       uses: jurplel/install-qt-action@v2
       with:
-        host: 'linux'
+        host: 'mac'
+        target: 'desktop'
         dir: '${{ github.workspace }}/Actions/MacOS/'
         tools: 'tools_ifw tools_qtcreator,qt.tools.qtcreator'
         install-deps: 'true'
@@ -77,7 +79,7 @@ jobs:
 
     # Build our project on Linux.
     - name: Build on Linux
-      if: startsWith(matrix.os, 'linux')
+      if: startsWith(matrix.os, 'ubuntu')
       env:
         QT_VERSION: ${{ matrix.version }}
       run: |
