@@ -13,9 +13,9 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+# Main workflow.
 jobs:
-  # This workflow contains a single job called "build"
+  # Build our application and see if we can properly build on other platforms.
   build:
     runs-on: ${{ matrix.os }}
     strategy:
@@ -71,9 +71,10 @@ jobs:
       env:
         QT_VERSION: ${{ matrix.version }}
       run: |
+        python Scripts/Build.py
         cd RealityCore
         call "%programfiles(x86)%\\Microsoft Visual Studio\\2019\\Enterprise\\VC\\Auxiliary\\Build\\vcvars64.bat"
-        IF "%QT_VERSION:~0,1%"=="5" ( dir %Qt5_DIR%\lib\cmake ) ELSE ( dir %Qt6_DIR%\lib\cmake )
+        dir %Qt6_DIR%\lib\cmake
         qmake
       shell: cmd
 
@@ -83,9 +84,9 @@ jobs:
       env:
         QT_VERSION: ${{ matrix.version }}
       run: |
+        python Scripts/Build.py
         cd RealityCore
         ls "$Qt6_DIR/lib/cmake"
-        fi
         qmake
       shell: bash
 
@@ -95,8 +96,8 @@ jobs:
       env:
         QT_VERSION: ${{ matrix.version }}
       run: |
+        python Scripts/Build.py
         cd RealityCore
         ls "$Qt6_DIR/lib/cmake"
-        fi
         qmake
       shell: bash
