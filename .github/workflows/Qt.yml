@@ -1,6 +1,6 @@
-# This is a basic workflow to help you get started with Actions
+# Qt workflow.
 
-name: CI
+name: Qt build workflow.
 
 # Controls when the workflow will run
 on:
@@ -17,19 +17,84 @@ on:
 jobs:
   # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
-    runs-on: windows-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        # We are going to use the latest versions for our builds.
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        version: ['6.2.3', '6.2.3', '6.2.3']
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
+		# Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-          - name: Install Qt
-            uses: jurplel/install-qt-action@v2
-            with:
-              version: '6.2.3'
-              host: 'windows'
-              target: 'desktop'
-              arch: 'win64_msvc2019_64'
-              dir: '${{ github.workspace }}/Actions/Windows/'
-              install-deps: 'true'
-              cached: 'false'
-              tools: 'tools_ifw tools_qtcreator,qt.tools.qtcreator'
+    - uses: actions/checkout@v2
+    
+    # Configure the Windows environment.
+    - name: Setup Windows.
+      if: startsWith(matrix.os, 'windows')
+      uses: jurplel/install-qt-action@v2
+      with:
+        host: 'windows'
+        target: 'desktop'
+        arch: 'win64_msvc2019_64'
+        dir: '${{ github.workspace }}/Actions/Windows/'
+        tools: 'tools_ifw tools_qtcreator,qt.tools.qtcreator'
+        install-deps: 'true'
+        cached: 'false'
+        
+    # Configure the Linux environment.
+    - name: Setup Linux
+      if: startsWith(matrix.os, 'linux')
+      uses: jurplel/install-qt-action@v2
+      with:
+        host: 'linux'
+        dir: '${{ github.workspace }}/Actions/Linux/'
+        tools: 'tools_ifw tools_qtcreator,qt.tools.qtcreator'
+        install-deps: 'true'
+        cached: 'false'
+    
+    # Configure the MacOS environment.
+    - name: Setup MacOS
+      if: startsWith(matrix.os, 'macos')
+      uses: jurplel/install-qt-action@v2
+      with:
+        host: 'linux'
+        dir: '${{ github.workspace }}/Actions/MacOS/'
+        tools: 'tools_ifw tools_qtcreator,qt.tools.qtcreator'
+        install-deps: 'true'
+        cached: 'false'
+    
+    # Build our application on Windows.
+    - name: Building on Windows
+      if: startsWith(matrix.os, 'windows')
+      env:
+        QT_VERSION: ${{ matrix.version }}
+      run: |
+        cd RealityCore
+        call "%programfiles(x86)%\\Microsoft Visual Studio\\2019\\Enterprise\\VC\\Auxiliary\\Build\\vcvars64.bat"
+        IF "%QT_VERSION:~0,1%"=="5" ( dir %Qt5_DIR%\lib\cmake ) ELSE ( dir %Qt6_DIR%\lib\cmake )
+        qmake
+      shell: cmd
+
+    # Build our project on Linux.
+    - name: Build on Linux
+      if: startsWith(matrix.os, 'linux')
+      env:
+        QT_VERSION: ${{ matrix.version }}
+      run: |
+        cd RealityCore
+        ls "$Qt6_DIR/lib/cmake"
+        fi
+        qmake
+      shell: bash
+
+    # Build our project on MacOS.
+    - name: Build on MacOS
+      if: startsWith(matrix.os, 'macos')
+      env:
+        QT_VERSION: ${{ matrix.version }}
+      run: |
+        cd RealityCore
+        ls "$Qt6_DIR/lib/cmake"
+        fi
+        qmake
+      shell: bash
