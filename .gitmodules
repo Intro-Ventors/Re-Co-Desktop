@@ -4,3 +4,6 @@
 [submodule "RealityCore/Assets"]
 	path = RealityCore/Assets
 	url = https://github.com/Intro-Ventors/Assets
+[submodule "RealityCore/ThirdParty/libdatachannel"]
+	path = RealityCore/ThirdParty/libdatachannel
+	url = https://github.com/paullouisageneau/libdatachannel

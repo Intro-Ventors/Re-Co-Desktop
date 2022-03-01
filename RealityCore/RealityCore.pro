@@ -57,12 +57,19 @@ RESOURCES +=                                                \
 INCLUDEPATH +=                                              \
     ThirdParty/screen_capture_lite/include                  \
     ThirdParty/lodepng                                      \
+    ThirdParty/libdatachannel/include                       \
     ThirdParty/QR-Code-generator/cpp
 
 RC_ICONS = "Assets/2D/Re-Co Logo.ico"
 
+LIBS +=                                                     \
+    -L"ThirdParty/libdatachannel/build"                     \
+    -ldatachannel
+
 win32:debug {
-    LIBS += -L"ThirdParty/screen_capture_lite/src_cpp/Debug" -lscreen_capture_lite_shared
+    LIBS +=                                                 \ 
+        -L"ThirdParty/screen_capture_lite/src_cpp/Debug"    \
+        -lscreen_capture_lite_shared
 
     COPIES += ScreenCaptureLiteSharedDebug
     ScreenCaptureLiteSharedDebug.files = $$files(ThirdParty/screen_capture_lite/Debug/screen_capture_lite_shared.dll)
@@ -70,7 +77,9 @@ win32:debug {
 }
 
 win32:release {
-    LIBS += -L"ThirdParty/screen_capture_lite/src_cpp/Release" -lscreen_capture_lite_shared
+    LIBS +=                                                 \
+        -L"ThirdParty/screen_capture_lite/src_cpp/Release"  \
+        -lscreen_capture_lite_shared
 
     COPIES += ScreenCaptureLiteSharedRelease
     ScreenCaptureLiteSharedRelease.files = $$files(ThirdParty/screen_capture_lite/Release/screen_capture_lite_shared.dll)
