@@ -3,10 +3,10 @@
 namespace WebRTC
 {
 	Connection::Connection(rtc::Configuration config)
-		: m_pPeerConnection(std::make_shared<rtc::PeerConnection>(config))
+		: m_PeerConnection(config)
 	{
 		// Setup on state change handler.
-		m_pPeerConnection->onStateChange([this](rtc::PeerConnection::State state)
+		m_PeerConnection.onStateChange([this](rtc::PeerConnection::State state)
 			{
 				switch (state)
 				{
@@ -29,7 +29,7 @@ namespace WebRTC
 		);
 
 		// Setup on gathering state change handler.
-		m_pPeerConnection->onGatheringStateChange([this](rtc::PeerConnection::GatheringState state)
+		m_PeerConnection.onGatheringStateChange([this](rtc::PeerConnection::GatheringState state)
 			{
 				switch (state)
 				{
@@ -46,7 +46,7 @@ namespace WebRTC
 		);
 
 		// Create the data channel.
-		m_pVideDataChannel = m_pPeerConnection->createDataChannel("capture");
+		m_pVideDataChannel = m_PeerConnection.createDataChannel("capture");
 
 		// Setup the data channel open handler.
 		m_pVideDataChannel->onOpen([this]
@@ -66,6 +66,6 @@ namespace WebRTC
 			}
 			);
 
-		m_pPeerConnection->setLocalDescription();
+		m_PeerConnection.setLocalDescription();
 	}
 }

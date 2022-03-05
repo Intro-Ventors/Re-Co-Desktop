@@ -30,7 +30,7 @@ namespace WebRTC
 	private:
 		Reactor m_Reactor;
 		std::string m_ConnectionID;
-		std::shared_ptr<rtc::PeerConnection> m_pPeerConnection = nullptr;
+		rtc::PeerConnection m_PeerConnection;
 		std::shared_ptr<rtc::DataChannel> m_pVideDataChannel = nullptr;
 		std::shared_mutex m_SharedMutex;
 		State m_State = State::Waiting;

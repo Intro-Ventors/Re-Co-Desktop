@@ -26,6 +26,9 @@ SOURCES +=                                                  \
     Source/Scipper/Monitor.cpp                              \
     Source/Scipper/FrameCapture.cpp                         \
                                                             \
+    Source/WebRTC/Connection.cpp                            \
+    Source/WebRTC/Reactor.cpp                               \
+                                                            \
     ThirdParty/lodepng/lodepng.cpp                          \
     ThirdParty/QR-Code-generator/cpp/qrcodegen.cpp
 
@@ -37,6 +40,10 @@ HEADERS +=                                                  \
     Source/GUI/ScreenWidget.hpp                             \
     Source/GUI/Authentication.hpp                           \
     Source/GUI/ApplicationGUI.hpp                           \
+                                                            \
+    Source/WebRTC/Connection.hpp                            \
+    Source/WebRTC/Reactor.hpp                               \
+    Source/WebRTC/Stream.hpp                                \
                                                             \
     Source/Scipper/Instance.hpp                             \
     Source/Scipper/RScreenCapture.hpp                       \
@@ -74,6 +81,10 @@ win32:debug {
     COPIES += ScreenCaptureLiteSharedDebug
     ScreenCaptureLiteSharedDebug.files = $$files(ThirdParty/screen_capture_lite/Debug/screen_capture_lite_shared.dll)
     ScreenCaptureLiteSharedDebug.path = $$PWD/debug
+
+    COPIES += libdatachannelSharedDebug
+    libdatachannelSharedDebug.files = $$files(ThirdParty/libdatachannel/build/datachannel.dll)
+    libdatachannelSharedDebug.path = $$PWD/debug
 }
 
 win32:release {
@@ -84,6 +95,10 @@ win32:release {
     COPIES += ScreenCaptureLiteSharedRelease
     ScreenCaptureLiteSharedRelease.files = $$files(ThirdParty/screen_capture_lite/Release/screen_capture_lite_shared.dll)
     ScreenCaptureLiteSharedRelease.path = $$PWD/release
+
+    COPIES += libdatachannelSharedRelease
+    libdatachannelSharedRelease.files = $$files(ThirdParty/libdatachannel/build/datachannel.dll)
+    libdatachannelSharedRelease.path = $$PWD/release
 }
 
 # Default rules for deployment.

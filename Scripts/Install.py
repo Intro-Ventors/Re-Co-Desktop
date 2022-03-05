@@ -17,6 +17,7 @@ if __name__ == "__main__":
     # Copy the generated executable from the release directory to the exporting directory.
     shutil.copy("RealityCore\\release\\RealityCore.exe", "Installer")
     shutil.copy("RealityCore\\release\\screen_capture_lite_shared.dll", "Installer")
+    shutil.copy("RealityCore\\release\\datachannel.dll", "Installer")
 
     # Run the Qt dependency scanner.
     os.system(f"cd \"Installer\" && call {qt_dependency_generator} RealityCore.exe")

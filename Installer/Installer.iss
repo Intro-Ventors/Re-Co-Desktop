@@ -18,6 +18,7 @@ Name: "{app}\translations"
 [Files]
 Source: "RealityCore.exe";					DestDir: "{app}"
 Source: "screen_capture_lite_shared.dll";	DestDir: "{app}"
+Source: "datachannel.dll";					DestDir: "{app}"
 Source: "D3Dcompiler_47.dll";               DestDir: "{app}"
 Source: "opengl32sw.dll";                   DestDir: "{app}"
 Source: "Qt6Core.dll";                      DestDir: "{app}"
