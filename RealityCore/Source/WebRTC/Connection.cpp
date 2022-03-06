@@ -2,7 +2,7 @@
 
 namespace WebRTC
 {
-	Connection::Connection(rtc::Configuration config)
+	Connection::Connection(const rtc::Configuration& config)
 		: m_PeerConnection(config)
 	{
 		// Setup on state change handler.

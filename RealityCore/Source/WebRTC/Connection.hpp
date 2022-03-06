@@ -25,7 +25,7 @@ namespace WebRTC
 		 *
 		 * @param config The connection configuration.
 		 */
-		explicit Connection(rtc::Configuration config);
+		explicit Connection(const rtc::Configuration& config);
 
 	private:
 		Reactor m_Reactor;

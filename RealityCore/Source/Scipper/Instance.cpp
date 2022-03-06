@@ -83,7 +83,7 @@ namespace Scipper
 
 		// Create the dummy capture configuration to get the window titles.
 		// This is the only way to get the window names because by directly calling the GetWindows() function will result in a corrupted stack.
-		const auto configuration = SL::Screen_Capture::CreateCaptureConfiguration([&, this]
+		const auto configuration = SL::Screen_Capture::CreateCaptureConfiguration([&condition, &resourceMutex, &bState, this]
 			{
 				// Lock the resources and wait till we can proceed.
 				auto lock = std::unique_lock(resourceMutex);
@@ -93,6 +93,7 @@ namespace Scipper
 				const auto windows = SL::Screen_Capture::GetWindows();
 
 				// Get the windows and iterate over them.
+				m_WindowTitles.reserve(windows.size());
 				for (auto const& window : windows)
 					m_WindowTitles.emplace_back(window.Name);
 
@@ -133,7 +134,7 @@ namespace Scipper
 
 		// Create the dummy capture configuration to get the monitor titles.
 		// This is the only way to get the monitor names because by directly calling the GetMonitors() function will result in a corrupted stack.
-		const auto configuration = SL::Screen_Capture::CreateCaptureConfiguration([&, this]
+		const auto configuration = SL::Screen_Capture::CreateCaptureConfiguration([&condition, &resourceMutex, &bState, this]
 			{
 				// Lock the resources and wait till we can proceed.
 				auto lock = std::unique_lock(resourceMutex);
@@ -143,6 +144,7 @@ namespace Scipper
 				const auto monitors = SL::Screen_Capture::GetMonitors();
 
 				// Get the monitors and iterate over them.
+				m_MonitorTitles.reserve(monitors.size());
 				for (auto const& monitor : monitors)
 					m_MonitorTitles.emplace_back(monitor.Name);
 

@@ -35,7 +35,7 @@ namespace Scipper
 	 */
 	struct ImageData
 	{
-		ImageData(const std::vector<RGBA8>& pData, uint32_t width, uint32_t height, uint64_t delta = 0) : p_ImageData(std::move(pData)), m_Width(width), m_Height(height), m_DeltaTime(delta) {}
+		ImageData(std::vector<RGBA8> pData, uint32_t width, uint32_t height, uint64_t delta = 0) : p_ImageData(std::move(pData)), m_DeltaTime(delta), m_Width(width), m_Height(height) {}
 
 		std::vector<RGBA8> p_ImageData = {};
 		uint64_t m_DeltaTime = 0;

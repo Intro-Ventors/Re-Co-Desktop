@@ -69,16 +69,12 @@ INCLUDEPATH +=                                              \
 
 RC_ICONS = "Assets/2D/Re-Co Logo.ico"
 
-LIBS +=                                                     \
-    -L"ThirdParty/libdatachannel/build"                     \
-    -ldatachannel
-
 win32:debug {
     LIBS +=                                                 \ 
         -L"ThirdParty/screen_capture_lite/src_cpp/Debug"    \
         -lscreen_capture_lite_shared                        \
                                                             \
-        -L"ThirdParty/libdatachannel/build/Debug"         \
+        -L"ThirdParty/libdatachannel/build/Debug"           \
         -ldatachannel
 
     COPIES += ScreenCaptureLiteSharedDebug
@@ -95,7 +91,7 @@ win32:release {
         -L"ThirdParty/screen_capture_lite/src_cpp/Release"  \
         -lscreen_capture_lite_shared                        \
                                                             \
-        -L"ThirdParty/libdatachannel/build/Release"       \
+        -L"ThirdParty/libdatachannel/build/Release"         \
         -ldatachannel
 
     COPIES += ScreenCaptureLiteSharedRelease

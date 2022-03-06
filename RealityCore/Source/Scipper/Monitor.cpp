@@ -1,43 +1,27 @@
 #include "Monitor.hpp"
 
-#include <condition_variable>
-
 namespace Scipper
 {
 	Monitor::Monitor(QString name)
 		: FrameCapture(std::move(name))
 	{
-		// Create the sync object.
-		std::condition_variable conditional = {};
-
 		// Create the capture configuration.
-		m_pConfiguration = SL::Screen_Capture::CreateCaptureConfiguration([&conditional, this]() -> std::vector<SL::Screen_Capture::Monitor>
+		m_pConfiguration = SL::Screen_Capture::CreateCaptureConfiguration([this]() -> std::vector<SL::Screen_Capture::Monitor>
 			{
 				// Get the monitors.
 				const auto monitors = SL::Screen_Capture::GetMonitors();
 
 				// Just skip searching if the name is null or empty.
-				if (m_Name.isEmpty())
+				if (!m_Name.isEmpty())
 				{
-					// Notify the parent thread to continue and return.
-					conditional.notify_one();
-					return monitors;
-				}
-
-				// Get the windows and iterate over them.
-				for (auto const& monitor : monitors)
-				{
-					// We have selected this as the required monitor.
-					if (m_Name == monitor.Name)
+					// Get the windows and iterate over them.
+					for (auto const& monitor : monitors)
 					{
-						// Notify the parent thread to continue and return.
-						conditional.notify_one();
-						return { monitor };
+						// We have selected this as the required monitor.
+						if (m_Name == monitor.Name)
+							return { monitor };
 					}
 				}
-
-				// Notify the parent thread to continue.
-				conditional.notify_one();
 
 				// Return the monitors if nothing found.
 				return monitors;
@@ -47,11 +31,6 @@ namespace Scipper
 
 		using namespace std::chrono_literals;
 		m_pConfiguration->setFrameChangeInterval(1ms);
-
-		// Wait till the thread has completed execution.
-		std::mutex mutex;
-		auto lock = std::unique_lock(mutex);
-		conditional.wait(lock);
 	}
 
 	void Monitor::onNewFrame(const SL::Screen_Capture::Image& image, const SL::Screen_Capture::Monitor& monitor)
@@ -69,7 +48,7 @@ namespace Scipper
 			if (m_bShouldRecord)
 			{
 				// Convert the image.
-				m_pImageData = std::move(convertRGBA(image, delta.count()));
+				m_pImageData = convertRGBA(image, delta.count());
 
 				// Emit the new frame signal.
 				emit newFrame(m_pImageData);
