@@ -1,8 +1,17 @@
 #include "GUI/ApplicationGUI.hpp"
 
+#ifdef RECO_SHARED
+#define RECO_API	__declspec(dllexport)
+
+#else
+#define RECO_API	
+
+#endif // RECO_SHARED
+
+
 extern "C"
 {
-	struct RealityCoreInstance
+	struct RECO_API RealityCoreInstance
 	{
 		/**
 		 * Constructor.
@@ -22,7 +31,7 @@ extern "C"
 	 *
 	 * @return The instance object pointer.
 	 */
-	RealityCoreInstance* CreateInstance()
+	RECO_API RealityCoreInstance* CreateInstance()
 	{
 		return new RealityCoreInstance();
 	}
@@ -32,7 +41,7 @@ extern "C"
 	 *
 	 * @param pInstance The instance pointer.
 	 */
-	int RunInstance(RealityCoreInstance* pInstance)
+	RECO_API int RunInstance(RealityCoreInstance* pInstance)
 	{
 		return pInstance->m_Application.run();
 	}
@@ -42,11 +51,13 @@ extern "C"
 	 *
 	 * @param pInstance The instance pointer to delete.
 	 */
-	void DestroyInstance(RealityCoreInstance* pInstance)
+	RECO_API void DestroyInstance(RealityCoreInstance* pInstance)
 	{
 		delete pInstance;
 	}
 }
+
+#ifndef RECO_SHARED
 
 int main(int argc, char* argv[])
 {
@@ -61,3 +72,5 @@ int main(int argc, char* argv[])
 
 	return result;
 }
+
+#endif // !RECO_SHARED
