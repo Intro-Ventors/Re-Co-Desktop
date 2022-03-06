@@ -76,28 +76,34 @@ LIBS +=                                                     \
 win32:debug {
     LIBS +=                                                 \ 
         -L"ThirdParty/screen_capture_lite/src_cpp/Debug"    \
-        -lscreen_capture_lite_shared
+        -lscreen_capture_lite_shared                        \
+                                                            \
+        -L"ThirdParty/libdatachannel/build/Debug"         \
+        -ldatachannel
 
     COPIES += ScreenCaptureLiteSharedDebug
     ScreenCaptureLiteSharedDebug.files = $$files(ThirdParty/screen_capture_lite/Debug/screen_capture_lite_shared.dll)
     ScreenCaptureLiteSharedDebug.path = $$PWD/debug
 
     COPIES += libdatachannelSharedDebug
-    libdatachannelSharedDebug.files = $$files(ThirdParty/libdatachannel/build/datachannel.dll)
+    libdatachannelSharedDebug.files = $$files(ThirdParty/libdatachannel/build/Debug/datachannel.dll)
     libdatachannelSharedDebug.path = $$PWD/debug
 }
 
 win32:release {
     LIBS +=                                                 \
         -L"ThirdParty/screen_capture_lite/src_cpp/Release"  \
-        -lscreen_capture_lite_shared
+        -lscreen_capture_lite_shared                        \
+                                                            \
+        -L"ThirdParty/libdatachannel/build/Release"       \
+        -ldatachannel
 
     COPIES += ScreenCaptureLiteSharedRelease
     ScreenCaptureLiteSharedRelease.files = $$files(ThirdParty/screen_capture_lite/Release/screen_capture_lite_shared.dll)
     ScreenCaptureLiteSharedRelease.path = $$PWD/release
 
     COPIES += libdatachannelSharedRelease
-    libdatachannelSharedRelease.files = $$files(ThirdParty/libdatachannel/build/datachannel.dll)
+    libdatachannelSharedRelease.files = $$files(ThirdParty/libdatachannel/build/Release/datachannel.dll)
     libdatachannelSharedRelease.path = $$PWD/release
 }
 
