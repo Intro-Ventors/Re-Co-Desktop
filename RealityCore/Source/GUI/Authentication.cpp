@@ -1,3 +1,5 @@
+// Copyright (c) 2022 Intro-Ventors
+
 #include "Authentication.hpp"
 #include "../../ui_Authentication.h"
 

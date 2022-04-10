@@ -1,10 +1,18 @@
+// Copyright (c) 2022 Intro-Ventors
+
 #include "GUI/ApplicationGUI.hpp"
 
 #ifdef RECO_SHARED
-#define RECO_API	__declspec(dllexport)
+#	if defined(Q_OS_WINDOWS)
+#		define RECO_API	__declspec(dllexport)
+
+#	elif defined(Q_OS_LINUX) || defined(Q_OS_DARWIN)
+#		define RECO_API	__attribute__((visibility("default")))
+
+#endif
 
 #else
-#define RECO_API	
+#	define RECO_API	
 
 #endif // RECO_SHARED
 
@@ -19,8 +27,8 @@ extern "C"
 		 * @param argc The argument count.
 		 * @param argv The variadic arguments.
 		 */
-		RealityCoreInstance(int argc = 0, char* argv[] = nullptr) :
-			m_Application(argc, argv, m_Instance) {}
+		RealityCoreInstance(int argc = 0, char* argv[] = nullptr)
+			: m_Application(argc, argv, m_Instance) {}
 
 		Scipper::Instance m_Instance;
 		GUI::ApplicationGUI m_Application;
@@ -41,7 +49,7 @@ extern "C"
 	 *
 	 * @param pInstance The instance pointer.
 	 */
-	RECO_API int RunInstance(RealityCoreInstance* pInstance)
+	RECO_API int RunInstance(const RealityCoreInstance* pInstance)
 	{
 		return pInstance->m_Application.run();
 	}

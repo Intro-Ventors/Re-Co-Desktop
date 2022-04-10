@@ -1,3 +1,5 @@
+// Copyright (c) 2022 Intro-Ventors
+
 #pragma once
 
 #include <QMainWindow>

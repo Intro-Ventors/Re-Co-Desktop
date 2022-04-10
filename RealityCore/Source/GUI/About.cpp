@@ -1,3 +1,5 @@
+// Copyright (c) 2022 Intro-Ventors
+
 #include "About.hpp"
 #include "../../ui_About.h"
 

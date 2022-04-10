@@ -1,3 +1,5 @@
+// Copyright (c) 2022 Intro-Ventors
+
 #include "Instance.hpp"
 
 #include <condition_variable>
