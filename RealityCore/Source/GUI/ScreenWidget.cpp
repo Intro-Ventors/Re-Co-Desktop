@@ -33,12 +33,21 @@ namespace GUI
 			// Create the image using the image data.
 			auto image = QImage(reinterpret_cast<const uint8_t*>(m_pImage->p_ImageData.data()), m_pImage->m_Width, m_pImage->m_Height, QImage::Format::Format_RGBA8888);
 
+#ifdef _DEBUG
+			// Set the time taken to capture the image and print it to the image.
+			QPainter printer;
+			if (printer.begin(&image))
+			{
+				printer.setPen(QPen(Qt::red));
+				printer.setFont(QFont("Consolas", 24, QFont::Bold));
+				printer.drawText(image.rect(), Qt::AlignLeft, "Delta time: " + QString::number(m_pImage->m_DeltaTime) + " ms (" + QString::number(1000 / m_pImage->m_DeltaTime) + " FPS)");
+				printer.end();
+			}
+
+#endif
+
 			// Scale it down and set the image as a pixmap.
 			m_pScreen->frame->setPixmap(QPixmap::fromImage(image.scaled(QSize(854, 480))));
-
-			// Set the delta time.
-			if (m_pImage->m_DeltaTime > 0)
-				m_pScreen->time->setText("Delta time: " + QString::number(m_pImage->m_DeltaTime) + " ms (" + QString::number(1000 / m_pImage->m_DeltaTime) + " FPS)");
 		}
 
 		// Paint everything with the default painting.

@@ -4,7 +4,7 @@
 
 #include <QMainWindow>
 #include <QScrollArea>
-#include <QVBoxLayout>
+#include <QHBoxLayout>
 
 #include "ScreenWidget.hpp"
 #include "../Scipper/Instance.hpp"
@@ -75,7 +75,7 @@ namespace GUI
 
 		Ui::MainWindow* m_pMainWindow = nullptr;
 		QScrollArea* m_pScrollArea = nullptr;
-		QVBoxLayout* m_pBoxLayout = nullptr;
+		QHBoxLayout* m_pBoxLayout = nullptr;
 		Scipper::Instance& m_Instance;
 
 		bool m_bCloseable = false;

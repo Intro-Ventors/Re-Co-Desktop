@@ -151,7 +151,7 @@ namespace GUI
 
 	void MainWindow::setupWindows()
 	{
-		m_pBoxLayout = new QVBoxLayout(m_pScrollArea);
+		m_pBoxLayout = new QHBoxLayout(m_pScrollArea);
 
 		// Refresh the monitors and get the vector.
 		const auto& monitors = m_Instance.refreshMonitors();
