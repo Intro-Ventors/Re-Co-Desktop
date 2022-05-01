@@ -4,9 +4,6 @@
 
 #include <chrono>
 #include <execution>
-#include <nlohmann/json.hpp>
-
-using json = nlohmann::json;
 
 namespace WebRTC
 {
@@ -26,8 +23,8 @@ namespace WebRTC
 		);
 
 		m_WebSocket.open("ws://127.0.0.1:8080");
-
-		while (!m_WebSocket.isOpen()) {
+		while (!m_WebSocket.isOpen())
+		{
 			if (m_WebSocket.isClosed())
 				return;
 
@@ -36,13 +33,14 @@ namespace WebRTC
 		}
 	}
 
-	void Connection::submitImage(const std::byte* pImage, uint64_t width, uint64_t height, uint8_t bitsPerPixel)
+	void Connection::submitImage(const std::byte* pImage, uint64_t width, uint64_t height, uint8_t channels)
 	{
 		// Just skip if we don't need to record.
 		if (!m_ShouldRecord)
 			return;
 
-		m_Sample.resize(width * height * 4);
+		// Else we can copy the image after resizing (who knows if the size was updated).
+		m_Sample.resize(width * height * channels);
 		std::copy(std::execution::par, pImage, pImage + m_Sample.size(), m_Sample.begin());
 
 		m_SampleTimeUs = Internal::clock::now();
@@ -68,7 +66,7 @@ namespace WebRTC
 		if (itr == document.end())
 			return;
 
-		std::string id = itr->get<std::string>();
+		const std::string id = itr->get<std::string>();
 		itr = document.find("type");
 
 		if (itr == document.end())
@@ -113,11 +111,11 @@ namespace WebRTC
 			client->m_Video = createVideo(pc.get(), client.get());
 
 			pc->setLocalDescription();
-			m_Clients.emplace(id, client);
+			m_Clients.try_emplace(id, client);
 		}
 		else if (type == "answer")
 		{
-			if (auto jt = m_Clients.find(id); jt != m_Clients.end()) 
+			if (auto jt = m_Clients.find(id); jt != m_Clients.end())
 			{
 				auto pc = m_Clients.at(id)->m_PeerConnectionRef;
 				auto sdp = document["sdp"].get<std::string>();

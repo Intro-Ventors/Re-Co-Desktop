@@ -45,7 +45,6 @@ HEADERS +=                                                  \
                                                             \
     Source/WebRTC/Connection.hpp                            \
     Source/WebRTC/Reactor.hpp                               \
-    Source/WebRTC/Stream.hpp                                \
     Source/WebRTC/Internal/Stream.hpp                       \
     Source/WebRTC/Internal/Client.hpp                       \
                                                             \

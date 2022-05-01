@@ -46,7 +46,18 @@ namespace WebRTC
 			 */
 			explicit Client(const std::shared_ptr<rtc::PeerConnection>& pc) : m_PeerConnection(pc) { }
 
+			/**
+			 * Set the current state.
+			 *
+			 * @param state The state to set.
+			 */
 			void setState(State state);
+
+			/**
+			 * Get the current state.
+			 *
+			 * @return The state.
+			 */
 			State getState();
 
 			std::optional<std::shared_ptr<ClientTrackData>> m_Video;

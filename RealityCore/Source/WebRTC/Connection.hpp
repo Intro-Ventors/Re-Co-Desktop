@@ -38,9 +38,9 @@ namespace WebRTC
 		 * @param pImage The image pointer.
 		 * @param width The image width.
 		 * @param height The image height.
-		 * @param bitsPerPixel The number of bits per pixel. Since we are uploading in BGRA, it'll most probably be 8.
+		 * @param channels The number of channels/ components in a pixel. Since we are uploading in BGRA, it'll most probably be 4.
 		 */
-		void submitImage(const std::byte* pImage, uint64_t width, uint64_t height, uint8_t bitsPerPixel = 8);
+		void submitImage(const std::byte* pImage, uint64_t width, uint64_t height, uint8_t channels = 4);
 
 		/**
 		 * Stop streaming.
@@ -94,7 +94,6 @@ namespace WebRTC
 		std::shared_mutex m_SharedMutex;
 		State m_State = State::Waiting;
 
-	private:
 		bool m_ShouldRecord = false;
 	};
 }

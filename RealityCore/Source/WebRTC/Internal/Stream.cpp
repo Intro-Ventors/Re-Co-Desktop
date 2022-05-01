@@ -16,7 +16,7 @@ namespace WebRTC
 			m_SampleTimeUs = {};
 			m_Sample = {};
 		}
-		
+
 		std::pair<std::shared_ptr<StreamSource>, Stream::StreamSourceType> Stream::unsafePrepareForSample()
 		{
 			std::shared_ptr<StreamSource> ss;
@@ -26,7 +26,7 @@ namespace WebRTC
 			const auto nextTime = m_Video->getSampleTime_us().time_since_epoch();
 			const auto currentTime = std::chrono::high_resolution_clock::now().time_since_epoch();
 
-			auto elapsed = currentTime - m_StartTime;
+			const auto elapsed = currentTime - m_StartTime;
 			if (nextTime > elapsed)
 			{
 				const auto waitTime = nextTime - elapsed;
@@ -37,7 +37,7 @@ namespace WebRTC
 
 			return { ss, sst };
 		}
-		
+
 		void Stream::sendSample()
 		{
 			std::lock_guard lock(m_Mutex);
@@ -50,20 +50,19 @@ namespace WebRTC
 			const auto sample = ss->getSample();
 			m_SampleHandler(sst, ss->getSampleTime_us().time_since_epoch().count(), sample);
 			ss->loadNextSample();
-			m_Reactor.issueCommand([this] {this->sendSample(); });
+			m_Reactor.issueCommand([this] { sendSample(); });
 		}
-		
+
 		void Stream::start()
 		{
 			std::lock_guard lock(m_Mutex);
-			if (m_IsRunningRef) {
+			if (m_IsRunningRef)
 				return;
-			}
 
 			m_IsRunning = true;
 			m_StartTime = std::chrono::high_resolution_clock::now().time_since_epoch();
 			m_Video->start();
-			m_Reactor.issueCommand([this] { this->sendSample(); });
+			m_Reactor.issueCommand([this] { sendSample(); });
 		}
 
 		void Stream::stop()

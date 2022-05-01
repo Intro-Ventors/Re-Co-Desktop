@@ -24,14 +24,43 @@ namespace WebRTC
 			rtc::binary m_Sample = {};
 
 		public:
+			/**
+			 * Default constructor.
+			 */
 			StreamSource() = default;
+
+			/**
+			 * Virtual destructor.
+			 */
 			virtual ~StreamSource();
 
+			/**
+			 * Stop the stream.
+			 */
 			virtual void stop();
+
+			/**
+			 * Start the stream.
+			 */
 			virtual void start() = 0;
+
+			/**
+			 * Load the next sample to show.
+			 */
 			virtual void loadNextSample() = 0;
 
+			/**
+			 * Get the sample time in micro seconds.
+			 *
+			 * @return The time.
+			 */
 			clock::time_point getSampleTime_us() const { return m_SampleTimeUs; }
+
+			/**
+			 * Get the binary data sample.
+			 *
+			 * @return The binary data.
+			 */
 			rtc::binary getSample() const { return m_Sample; }
 		};
 
@@ -55,18 +84,49 @@ namespace WebRTC
 
 			const std::shared_ptr<StreamSource> m_Video;
 
-			Stream(std::shared_ptr<StreamSource> video) : m_Video(video) {}
+			/**
+			 * Explicit constructor.
+			 *
+			 * @param video The video stream.
+			 */
+			explicit Stream(const std::shared_ptr<StreamSource>& video) : m_Video(video) {}
+
+			/**
+			 * Destructor.
+			 */
 			~Stream() { stop(); }
 
 		private:
 			rtc::synchronized_callback<StreamSourceType, uint64_t, rtc::binary> m_SampleHandler;
 
+			/**
+			 * Prepare the stream for a sample, and can be unsafe.
+			 *
+			 * @return The stream source and the stream source type.
+			 */
 			std::pair<std::shared_ptr<StreamSource>, StreamSourceType> unsafePrepareForSample();
+
+			/**
+			 * Send a sample to the client(s).
+			 */
 			void sendSample();
 
 		public:
-			void onSample(std::function<void(StreamSourceType, uint64_t, rtc::binary)> handler) { m_SampleHandler = handler; }
+			/**
+			 * Handle on sample.
+			 *
+			 * @param handler The handler function.
+			 */
+			void onSample(const std::function<void(StreamSourceType, uint64_t, rtc::binary)>& handler) { m_SampleHandler = handler; }
+
+			/**
+			 * Start streaming.
+			 */
 			void start();
+
+			/**
+			 * Stop streaming.
+			 */
 			void stop();
 
 			const bool& m_IsRunningRef = m_IsRunning;
