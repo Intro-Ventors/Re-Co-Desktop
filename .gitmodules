@@ -7,3 +7,6 @@
 [submodule "RealityCore/ThirdParty/libdatachannel"]
 	path = RealityCore/ThirdParty/libdatachannel
 	url = https://github.com/paullouisageneau/libdatachannel
+[submodule "RealityCore/ThirdParty/json"]
+	path = RealityCore/ThirdParty/json
+	url = https://github.com/nlohmann/json

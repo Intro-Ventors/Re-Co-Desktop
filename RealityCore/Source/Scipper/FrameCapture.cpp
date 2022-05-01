@@ -13,6 +13,11 @@ namespace Scipper
 	FrameCapture::FrameCapture(QString name)
 		: m_Name(name)
 	{
+		rtc::Configuration configuration;
+		configuration.iceServers.emplace_back("stun:stun.l.google.com:19302");
+		configuration.disableAutoNegotiation = true;
+
+		m_pConnection = std::make_shared<WebRTC::Connection>(configuration);
 	}
 
 	std::shared_ptr<ImageData> FrameCapture::convertRGBA(const SL::Screen_Capture::Image& image, const uint64_t delta)

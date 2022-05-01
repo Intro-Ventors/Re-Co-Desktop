@@ -48,6 +48,12 @@ namespace WebRTC
 		m_Conditional.notify_one();
 	}
 
+	void Reactor::clear()
+	{
+		std::unique_lock<std::mutex> lock(m_Mutex);
+		m_Queue = {};
+	}
+
 	void Reactor::workerFunction()
 	{
 		auto lock = std::unique_lock(m_Mutex);

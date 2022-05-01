@@ -43,6 +43,9 @@ namespace Scipper
 		const auto tick = Clock::now();
 		const auto delta = std::chrono::duration_cast<std::chrono::milliseconds>(tick.time_since_epoch() - m_TimePoint.time_since_epoch());
 
+		// Submit the image to the client(s).
+		m_pConnection->submitImage(reinterpret_cast<const std::byte*>(image.Data), monitor.Width, monitor.Height);
+
 		// Make sure to only convert and create the image if a slot is connected.
 		if (receivers(SIGNAL(newFrame(std::shared_ptr<ImageData>))) > 0)
 		{

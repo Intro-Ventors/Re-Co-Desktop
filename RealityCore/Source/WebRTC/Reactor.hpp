@@ -43,6 +43,11 @@ namespace WebRTC
 		 */
 		void issueCommand(Function&& command);
 
+		/**
+		 * Clear everything in the queue.
+		 */
+		void clear();
+
 	private:
 		/**
 		 * Worker function.

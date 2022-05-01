@@ -3,6 +3,7 @@
 #pragma once
 
 #include "RScreenCapture.hpp"
+#include "../WebRTC/Connection.hpp"
 
 #include <ScreenCapture.h>
 
@@ -88,6 +89,7 @@ namespace Scipper
 
 	protected:
 		QString m_Name;
+		std::shared_ptr<WebRTC::Connection> m_pConnection = nullptr;
 		CaptureConfig m_pConfiguration = nullptr;
 		std::atomic<bool> m_bShouldRecord = true;
 		std::shared_ptr<ImageData> m_pImageData = nullptr;

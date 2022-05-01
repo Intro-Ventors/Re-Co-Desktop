@@ -28,6 +28,8 @@ SOURCES +=                                                  \
                                                             \
     Source/WebRTC/Connection.cpp                            \
     Source/WebRTC/Reactor.cpp                               \
+    Source/WebRTC/Internal/Stream.cpp                       \
+    Source/WebRTC/Internal/Client.cpp                       \
                                                             \
     ThirdParty/lodepng/lodepng.cpp                          \
     ThirdParty/QR-Code-generator/cpp/qrcodegen.cpp
@@ -44,6 +46,8 @@ HEADERS +=                                                  \
     Source/WebRTC/Connection.hpp                            \
     Source/WebRTC/Reactor.hpp                               \
     Source/WebRTC/Stream.hpp                                \
+    Source/WebRTC/Internal/Stream.hpp                       \
+    Source/WebRTC/Internal/Client.hpp                       \
                                                             \
     Source/Scipper/Instance.hpp                             \
     Source/Scipper/RScreenCapture.hpp                       \
@@ -65,7 +69,8 @@ INCLUDEPATH +=                                              \
     ThirdParty/screen_capture_lite/include                  \
     ThirdParty/lodepng                                      \
     ThirdParty/libdatachannel/include                       \
-    ThirdParty/QR-Code-generator/cpp
+    ThirdParty/QR-Code-generator/cpp                        \
+    ThirdParty/json/include                        
 
 RC_ICONS = "Assets/2D/Re-Co Logo.ico"
 
