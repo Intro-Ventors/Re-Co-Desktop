@@ -10,14 +10,26 @@ namespace WebRTC
 {
 	namespace Internal
 	{
+		/**
+		 * Client track data struct.
+		 */
 		struct ClientTrackData final
 		{
 			std::shared_ptr<rtc::Track> m_Track;
 			std::shared_ptr<rtc::RtcpSrReporter> m_Sender;
 
-			ClientTrackData(const std::shared_ptr<rtc::Track>& track, const std::shared_ptr<rtc::RtcpSrReporter>& sender) : m_Track(track), m_Sender(sender) {}
+			/**
+			 * Explicit constructor.
+			 *
+			 * @param track The track pointer.
+			 * @param sender the sender pointer.
+			 */
+			explicit ClientTrackData(const std::shared_ptr<rtc::Track>& track, const std::shared_ptr<rtc::RtcpSrReporter>& sender) : m_Track(track), m_Sender(sender) {}
 		};
 
+		/**
+		 * Client structure.
+		 */
 		struct Client final
 		{
 			enum class State {
@@ -26,6 +38,12 @@ namespace WebRTC
 				WaitingForAudio,
 				Ready
 			};
+
+			/**
+			 * Explicit constructor.
+			 *
+			 * @param pc The peer connection pointer.
+			 */
 			explicit Client(const std::shared_ptr<rtc::PeerConnection>& pc) : m_PeerConnection(pc) { }
 
 			void setState(State state);
@@ -42,11 +60,20 @@ namespace WebRTC
 			std::shared_ptr<rtc::PeerConnection> m_PeerConnection;
 		};
 
-		struct ClientTrack 
+		/**
+		 * Client track structure.
+		 */
+		struct ClientTrack
 		{
 			std::string m_ID;
 			std::shared_ptr<ClientTrackData> m_TrackData;
 
+			/**
+			 * Explicit constructor.
+			 *
+			 * @param id The ID of the track.
+			 * @param trackData The track data.
+			 */
 			explicit ClientTrack(std::string id, std::shared_ptr<ClientTrackData> trackData) : m_ID(id), m_TrackData(trackData) {}
 		};
 	}

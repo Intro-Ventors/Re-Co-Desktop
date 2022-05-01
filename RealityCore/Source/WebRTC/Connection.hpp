@@ -3,11 +3,14 @@
 #pragma once
 
 #include <rtc/rtc.hpp>
+#include <nlohmann/json.hpp>
 
 #include "Internal/Client.hpp"
 
 namespace WebRTC
 {
+	using json = nlohmann::json;
+
 	/**
 	 * Connection class.
 	 */
@@ -27,7 +30,7 @@ namespace WebRTC
 		 *
 		 * @param config The connection configuration.
 		 */
-		explicit Connection(const rtc::Configuration& config);
+		explicit Connection(rtc::Configuration&& config);
 
 		/**
 		 * Submit an image to the connection and send it to the client.
@@ -55,6 +58,31 @@ namespace WebRTC
 		void loadNextSample() override;
 
 	private:
+		/**
+		 * Setup the connection with the socket.
+		 *
+		 * @param config The configuration.
+		 * @param document The JSON document.
+		 */
+		void setupConnection(const rtc::Configuration& config, const json& document);
+
+		/**
+		 * Create video.
+		 *
+		 * @param pPeerConnection The peer connection pointer.
+		 * @param pClient The client pointer.
+		 * @return The created video.
+		 */
+		std::optional<std::shared_ptr<Internal::ClientTrackData>> createVideo(rtc::PeerConnection* pPeerConnection, Internal::Client* pClient);
+
+		/**
+		 * Handle on track open.
+		 *
+		 * @param pClient The client pointer.
+		 */
+		void onTrackOpen(Internal::Client* pClient);
+
+	private:
 		Reactor m_Reactor;
 		std::string m_ConnectionID;
 		rtc::WebSocket m_WebSocket;
@@ -65,5 +93,8 @@ namespace WebRTC
 
 		std::shared_mutex m_SharedMutex;
 		State m_State = State::Waiting;
+
+	private:
+		bool m_ShouldRecord = false;
 	};
 }

@@ -14,7 +14,8 @@ namespace WebRTC
 		using clock = std::chrono::high_resolution_clock;
 
 		/**
-		 * Stream source class.
+		 * Stream source base class.
+		 * All the sources needs to inherit this and be used to stream data back to the user.
 		 */
 		class StreamSource
 		{
@@ -34,6 +35,10 @@ namespace WebRTC
 			rtc::binary getSample() const { return m_Sample; }
 		};
 
+		/**
+		 * Stream class.
+		 * This is used to upload data to the client.
+		 */
 		class Stream final : public std::enable_shared_from_this<Stream>
 		{
 			clock::duration m_StartTime;
