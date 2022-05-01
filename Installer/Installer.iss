@@ -7,6 +7,10 @@ WizardStyle=modern
 DefaultDirName={autopf}\Reality Core
 DefaultGroupName=RealityCore
 OutputBaseFilename=RealityCoreInstaller
+SetupIconFile="Re-Co Logo.ico"
+
+[Tasks]
+Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Dirs]
 Name: "{app}\iconengines"
@@ -16,9 +20,9 @@ Name: "{app}\styles"
 Name: "{app}\translations"
 
 [Files]
-Source: "RealityCore.exe";					DestDir: "{app}"
-Source: "screen_capture_lite_shared.dll";	DestDir: "{app}"
-Source: "datachannel.dll";					DestDir: "{app}"
+Source: "RealityCore.exe";					        DestDir: "{app}"
+Source: "screen_capture_lite_shared.dll";	  DestDir: "{app}"
+Source: "datachannel.dll";					        DestDir: "{app}"
 Source: "D3Dcompiler_47.dll";               DestDir: "{app}"
 Source: "opengl32sw.dll";                   DestDir: "{app}"
 Source: "Qt6Core.dll";                      DestDir: "{app}"
@@ -33,3 +37,6 @@ Source: "translations\*";                   DestDir: "{app}\translations"
 
 [Run]
 Filename: {app}\RealityCore.exe; Description: Run Application; Flags: postinstall nowait skipifsilent unchecked
+
+[Icons]
+Name: "{userdesktop}\RealityCore"; Filename: "{app}\RealityCore.exe"; Tasks: desktopicon

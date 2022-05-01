@@ -3,6 +3,7 @@
 #include "ApplicationGUI.hpp"
 
 #include <QTimer>
+#include <QMouseEvent>
 
 namespace GUI
 {
@@ -18,7 +19,7 @@ namespace GUI
 		QObject::connect(&m_SystemTrayIcon, &QSystemTrayIcon::activated, this, &ApplicationGUI::onSystemTrayActivation);
 
 		// Set the system tray icon tool tip.
-		m_SystemTrayIcon.setToolTip("Reality Core");
+		m_SystemTrayIcon.setToolTip("Reality Core is running in the background.");
 
 		// Create the system tray icon context menu and set it.
 		createContextMenu();
@@ -77,7 +78,9 @@ namespace GUI
 			// If the window is not visible, maximize and show the window.
 			if (m_Window.isHidden())
 			{
-				// Show the window.
+				// Show the window. Make sure to maximize, minimize and maximize it back again to refresh the widgets.
+				m_Window.showMaximized();
+				m_Window.showMinimized();
 				m_Window.showMaximized();
 
 				// Refresh the screens to be displayed.
